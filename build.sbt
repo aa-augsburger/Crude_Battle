@@ -10,7 +10,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "ch.hevs.gdx2d" % "gdx2d-desktop" % "1.2.1",  // ← contient PortableApplication + core
+  "ch.hevs.gdx2d" % "gdx2d-desktop" % "1.2.1",
   "com.badlogicgames.gdx" % "gdx-backend-lwjgl"  % "1.12.1",
   "com.badlogicgames.gdx" % "gdx-platform"       % "1.12.1" classifier "natives-desktop"
 )

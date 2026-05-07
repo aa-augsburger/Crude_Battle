@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.Color
  * @author Steve Devènes (dst)
  * @version 1.0
  */
-class DemoSimpleAnimation() extends PortableApplication {
+class DemoSimpleAnimation() extends PortableApplication(1920,1080) {
   var radius = 6
   var speed = 1
   var screenHeight, screenWidth = 0
@@ -20,6 +20,7 @@ class DemoSimpleAnimation() extends PortableApplication {
   override def onInit(): Unit = {
     // Sets the window title
     setTitle("Simple demo, mui 2013")
+
 
     screenHeight = Gdx.graphics.getHeight
     screenWidth = Gdx.graphics.getWidth
