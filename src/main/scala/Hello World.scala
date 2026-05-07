@@ -11,7 +11,7 @@ import ch.hevs.gdx2d.desktop.PortableApplication
  * @version 1.0
  */
 class DemoSimpleAnimation() extends PortableApplication {
-  var radius = 5
+  var radius = 6
   var speed = 1
   var screenHeight, screenWidth = 0
 
