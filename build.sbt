@@ -1,4 +1,4 @@
-name := "MonProjetGDX2D"
+name := "Crude Battle"
 
 version := "0.1"
 

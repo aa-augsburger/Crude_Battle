@@ -2,6 +2,6 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="Crude_Battle,Crude_Battle.main,Crude_Battle.test,MonProjetGDX2D,MonProjetGDX2D.main,MonProjetGDX2D.test" />
+    <profile name="sbt 1" modules="Crude Battle,Crude Battle.main,Crude Battle.test,Crude_Battle,Crude_Battle.main,Crude_Battle.test,MonProjetGDX2D,MonProjetGDX2D.main,MonProjetGDX2D.test" />
   </component>
 </project>
