@@ -1,13 +1,14 @@
 package Examples.gdx2d.demos.scrolling
 
-import scala.collection.mutable.ArrayBuffer
+import Examples.gdx2d.demos.scrolling.objects.{Brick, Cloud, Coin, Pipe, Sky}
 
-import ch.hevs.gdx2d.demos.scrolling.objects._
+import scala.collection.mutable.ArrayBuffer
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject
 import ch.hevs.gdx2d.lib.utils.Logger
 import com.badlogic.gdx.{Gdx, Input}
+
 
 /**
  * Demonstrates how to scroll and zoom on a scene. Also demonstrates how to

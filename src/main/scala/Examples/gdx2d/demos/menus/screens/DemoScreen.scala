@@ -1,10 +1,12 @@
 package Examples.gdx2d.demos.menus.screens
 
-import ch.hevs.gdx2d.demos.menus.screens.example_screens.{CreditsScreen, PhysicsScreen, SplashScreen}
+import Examples.gdx2d.demos.menus.screens.example_screens.{CreditsScreen, PhysicsScreen}
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.lib.utils.Logger
 import com.badlogic.gdx.Input
+
+import java.awt.SplashScreen
 
 /**
  * Show how to add multiple screens and switch between them with different

@@ -1,13 +1,13 @@
 package Examples.gdx2d.demos.music.midiplayer
 
-import java.util.{ArrayList, Collections}
+import Examples.gdx2d.demos.music.midiplayer.midilayer.{MIDIListener, MIDIMessage, MIDIPLayer}
 
+import java.util.{ArrayList, Collections}
 import ch.hevs.gdx2d.components.audio.SoundSample
 import ch.hevs.gdx2d.components.colors.ColorUtils
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.lib.utils.Logger
-import ch.hevs.gdx2d.demos.music.midiplayer.midilayer.{MIDIListener, MIDIMessage, MIDIPLayer}
 import com.badlogic.gdx.graphics.Color
 
 /**

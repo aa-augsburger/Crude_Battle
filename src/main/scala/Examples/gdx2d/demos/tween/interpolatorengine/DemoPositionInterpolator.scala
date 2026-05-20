@@ -1,6 +1,6 @@
 package Examples.gdx2d.demos.tween.interpolatorengine
 
-import ch.hevs.gdx2d.demos.tween.Ball
+import Examples.gdx2d.demos.tween.Ball
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.Gdx

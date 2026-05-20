@@ -9,9 +9,7 @@ import ch.hevs.gdx2d.lib.utils.Logger
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
-
-import ch.hevs.gdx2d.demos.physics.car.components.Car
-
+import components.Car
 /**
  * Shows how to make a top-down car with physics.
  *

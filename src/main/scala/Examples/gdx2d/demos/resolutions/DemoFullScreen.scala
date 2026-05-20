@@ -1,6 +1,6 @@
 package Examples.gdx2d.demos.resolutions
+import Examples.gdx2d.demos.scrolling.DemoScrolling
 
-import ch.hevs.gdx2d.demos.scrolling.DemoScrolling
 
 /**
  * Simply launches a demo in full-screen mode.
