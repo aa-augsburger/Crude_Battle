@@ -86,9 +86,9 @@ class DemoFontGeneration extends PortableApplication {
     g.drawStringCentered(y / 2 + y * 4, "Timeless size 40", timeless40)
     g.drawStringCentered(y / 2 + y * 3, "Optimus size 40", optimus40)
     g.drawStringCentered(y / 2 + y * 2, "Optimus size 60", optimus60)
-
-    g.drawStringRotated(w / 2 - 50, y / 2 + y * 4.8f, "Hello", starjedi40, 20f)
-    g.drawStringRotated(w / 2 + 50, y / 2 + y * 4.8f, "World", starjedi40, -20f)
+////
+//    g.drawStringRotated(w / 2 - 50, y / 2 + y * 4.8f, "Hello", starjedi40, 20f)
+//    g.drawStringRotated(w / 2 + 50, y / 2 + y * 4.8f, "World", starjedi40, -20f)
 
     g.setColor(Color.MAGENTA)
     g.drawString(10f, h - 10, "left\naligned\ntext", Align.left)
