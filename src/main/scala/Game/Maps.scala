@@ -6,18 +6,16 @@ import com.badlogic.gdx.graphics.Color
 sealed trait TerrainType
 object TerrainType {
   case object Air extends TerrainType
-  case object Terre extends TerrainType
+  ase object Terre extends TerrainType
   case object Roche extends TerrainType
 }
 
 class Maps {
   val largeur: Int = 2048
   val hauteur: Int = 1080
-  // Création du tableau 2D avec le type de terrain
   private val grille: Array[Array[TerrainType]] = Array.ofDim[TerrainType](largeur, hauteur)
   println(s"Map created with dimensions: ${grille.length}x${grille(0).length}")
 
-  //initionalisation de la map
   def initMaps(): Unit = {
     for (x <- 0 until largeur; y <- 0 until hauteur) {
       if (y < 200) {
@@ -30,7 +28,6 @@ class Maps {
     }
     println("Map initialisée avec succès.")
   }
-
   //refresh de la map
   def refreshMaps(g: GdxGraphics): Unit = {
     for (x <- 0 until largeur; y <- 0 until hauteur) {
