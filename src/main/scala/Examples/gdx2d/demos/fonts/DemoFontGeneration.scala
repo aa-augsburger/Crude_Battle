@@ -45,7 +45,7 @@ class DemoFontGeneration extends PortableApplication {
     parameter.size = generator.scaleForPixelHeight(60)
     parameter.color = Color.BLUE
     optimus60 = generator.generateFont(parameter)
-    generator.dispose()
+    generator.dispose().timeless40
 
     generator = new FreeTypeFontGenerator(timelessF)
     parameter.size = generator.scaleForPixelHeight(40)
