@@ -37,7 +37,12 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
     }
 
     //Draw the tank
-    g.drawFilledRectangle(myTank.getPos-15, myMaps.world(myTank.getPos)+15, 60, 30, 0, Color.RED)
+    var c = 5
+    val deltaY = myMaps.dirt(myTank.posX+30)-myMaps.dirt(myTank.posX-30)
+    val angle = Math.atan2(deltaY, myTank.length)
+    println(Math.signum(angle))
+    c = c * Math.signum(angle).toInt
+    g.drawFilledRectangle(myTank.getPos-15, myMaps.dirt(myTank.getPos+c), myTank.length, 30, Math.toDegrees(angle).toFloat, Color.RED)
 
     //Draw the tourette
 
