@@ -71,7 +71,7 @@ class DemoPinball extends PortableApplication {
   }
 
   override def onInit(): Unit = {
-    ballSprite = new Spritesheet("images/pinball/sprites.png", 20, 20)
+    ballSprite = new Spritesheet("examples/images/pinball/sprites.png", 20, 20)
     decorations = new LinkedList[TemporaryDrawable]()
     val h = Gdx.graphics.getHeight.toFloat
     val w = Gdx.graphics.getWidth.toFloat

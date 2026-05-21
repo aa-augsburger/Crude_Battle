@@ -23,10 +23,10 @@ class DemoBabyPiano extends PortableApplication {
     setTitle("Sound samples player, mui 2014")
 
     // Load the sound files
-    s1 = new SoundSample("music/babypianosamples/Honky_C1.wav")
-    s2 = new SoundSample("music/babypianosamples/Honky_C2.wav")
-    s3 = new SoundSample("music/babypianosamples/Honky_C3.wav")
-    s4 = new SoundSample("music/babypianosamples/Honky_C4.wav")
+    s1 = new SoundSample("examples/music/babypianosamples/Honky_C1.wav")
+    s2 = new SoundSample("examples/music/babypianosamples/Honky_C2.wav")
+    s3 = new SoundSample("examples/music/babypianosamples/Honky_C3.wav")
+    s4 = new SoundSample("examples/music/babypianosamples/Honky_C4.wav")
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

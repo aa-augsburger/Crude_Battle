@@ -32,7 +32,7 @@ class DemoGUI extends PortableApplication {
     stage = new Stage()
     Gdx.input.setInputProcessor(stage)
 
-    skin = new Skin(Gdx.files.internal("ui/uiskin.json"))
+    skin = new Skin(Gdx.files.internal("examples/ui/uiskin.json"))
 
     newGameButton = new TextButton("Click me", skin)
     newGameButton.setWidth(buttonWidth)

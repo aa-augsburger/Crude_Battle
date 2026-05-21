@@ -18,8 +18,8 @@ class Spaceship(position: Vector2) extends DrawableObject {
   box.setBodyAngularDamping(0.4f)
   box.setBodyLinearDamping(0.2f)
 
-  private val shipImage = new BitmapImage("images/rocket_128.png")
-  private val flameImage = new BitmapImage("images/flame.png")
+  private val shipImage = new BitmapImage("examples/images/rocket_128.png")
+  private val flameImage = new BitmapImage("examples/images/flame.png")
 
   var thrustLeft = false
   var thrustRight = false

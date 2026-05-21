@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.Filter
 class Particle(position: Vector2, radius: Int, protected val maxAge: Int)
   extends PhysicsBox(null, position, radius.toFloat, radius.toFloat, 0.12f, 1f, 1f) {
 
-  private val img = new BitmapImage("images/texture.png")
+  private val img = new BitmapImage("examples/images/texture.png")
   private var age = 0
   private var initialized = false
 

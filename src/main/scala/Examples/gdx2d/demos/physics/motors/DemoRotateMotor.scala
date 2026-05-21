@@ -42,10 +42,10 @@ class DemoRotateMotor extends PortableApplication(512, 256) {
 
     new PhysicsScreenBoundaries(getWindowWidth.toFloat, getWindowHeight.toFloat)
 
-    clockBitmap = new BitmapImage("images/clock.png")
-    secondBitmap = new BitmapImage("images/clock_second.png")
-    minuteBitmap = new BitmapImage("images/clock_minute.png")
-    hourBitmap = new BitmapImage("images/clock_hour.png")
+    clockBitmap = new BitmapImage("examples/images/clock.png")
+    secondBitmap = new BitmapImage("examples/images/clock_second.png")
+    minuteBitmap = new BitmapImage("examples/images/clock_minute.png")
+    hourBitmap = new BitmapImage("examples/images/clock_hour.png")
 
     val df = new SimpleDateFormat("HH:mm:ss")
     val timeParts = df.format(new Date()).split(":")

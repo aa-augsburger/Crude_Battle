@@ -17,7 +17,7 @@ class DemoShaderSimple extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/bicolor.fp")
+      g.setShader("examples/shader/bicolor.fp")
     }
 
     g.clear()

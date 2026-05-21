@@ -19,8 +19,8 @@ import com.badlogic.gdx.graphics.Color
 class DemoMIDIPLayer extends PortableApplication {
 
   private val nSamples = 104
-  private val DATADIR = "music/midiplayer/pianonotes/"
-  private val FILEPATH = "music/midiplayer/brahms_lullaby.mid"
+  private val DATADIR = "examples/music/midiplayer/pianonotes/"
+  private val FILEPATH = "examples/music/midiplayer/brahms_lullaby.mid"
 
   private var notesSamples: ArrayList[SoundSample] = _
   private val currentlyPlayingNotes = new ArrayList[Integer]()

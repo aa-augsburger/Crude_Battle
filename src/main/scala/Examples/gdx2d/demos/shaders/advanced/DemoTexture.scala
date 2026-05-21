@@ -22,8 +22,8 @@ class DemoTexture extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/advanced/vignette.fp")
-      g.getShaderRenderer.addTexture("images/lena.png", "texture0")
+      g.setShader("examples/shader/advanced/vignette.fp")
+      g.getShaderRenderer.addTexture("examples/images/lena.png", "texture0")
     }
 
     t += Gdx.graphics.getDeltaTime

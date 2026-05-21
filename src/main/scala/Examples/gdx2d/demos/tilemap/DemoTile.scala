@@ -28,7 +28,7 @@ class DemoTile extends PortableApplication {
     setTitle("Tile maps loader, mui 2015")
     Gdx.app.log("[TileDemo]", "Demonstrates loading a generated map")
 
-    tiledMap = new TmxMapLoader().load("maps/desert.tmx")
+    tiledMap = new TmxMapLoader().load("examples/maps/desert.tmx")
     tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap)
   }
 

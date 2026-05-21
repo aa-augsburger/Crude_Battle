@@ -34,7 +34,7 @@ class Rotor(name: String, position: Vector2, private val w: Float, private val h
 }
 
 object Rotor {
-  lazy val screw = new BitmapImage("images/screw.png")
+  lazy val screw = new BitmapImage("examples/images/screw.png")
 }
 
 /**

@@ -19,7 +19,7 @@ class DemoMusicPlay extends PortableApplication {
   override def onInit(): Unit = {
     setTitle("Music player, mui 2013")
     // Load the MP3 sound file
-    f = new MusicPlayer("music/Blues-Loop.mp3")
+    f = new MusicPlayer("examples/music/Blues-Loop.mp3")
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

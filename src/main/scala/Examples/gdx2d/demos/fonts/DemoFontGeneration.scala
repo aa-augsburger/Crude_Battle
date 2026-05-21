@@ -30,10 +30,10 @@ class DemoFontGeneration extends PortableApplication {
   override def onInit(): Unit = {
     setTitle("Font generation demo, mui 2013")
 
-    val optimusF = Gdx.files.internal("font/OptimusPrinceps.ttf")
-    val timelessF = Gdx.files.internal("font/Timeless.ttf")
-    val starjediF = Gdx.files.internal("font/Starjedi.ttf")
-    val icePixelF = Gdx.files.internal("font/ice_pixel-7.ttf")
+    val optimusF = Gdx.files.internal("examples/font/OptimusPrinceps.ttf")
+    val timelessF = Gdx.files.internal("examples/font/Timeless.ttf")
+    val starjediF = Gdx.files.internal("examples/font/Starjedi.ttf")
+    val icePixelF = Gdx.files.internal("examples/font/ice_pixel-7.ttf")
 
     val parameter = new FreeTypeFontParameter
 

@@ -36,7 +36,7 @@ class DemoAllShaders extends PortableApplication {
       g.setShader(s"shader/${shaders(currentShaderID)}")
       val sr = g.getShaderRenderer
       if (sr != null) {
-        sr.addTexture("images/lena.png", "texture0")
+        sr.addTexture("examples/images/lena.png", "texture0")
       }
       Logger.log(s"Current shader set to ${shaders(currentShaderID)}")
       previousShaderID = currentShaderID

@@ -20,7 +20,7 @@ class DemoGetImageColor extends PortableApplication {
   override def onInit(): Unit = {
     setTitle("Get image color, mui 2014")
     Logger.log("Move the mouse on the image to get its color")
-    imgBitmap = new BitmapImage("images/color_pattern.png")
+    imgBitmap = new BitmapImage("examples/images/color_pattern.png")
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

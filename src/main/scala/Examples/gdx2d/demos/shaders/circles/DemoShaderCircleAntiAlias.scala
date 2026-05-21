@@ -28,7 +28,7 @@ class DemoShaderCircleAntiAlias extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/circles/circle_aa.fp")
+      g.setShader("examples/shader/circles/circle_aa.fp")
       g.getShaderRenderer.setUniform("color", new Vector3(Color.PINK.r, Color.PINK.g, Color.PINK.b))
     }
 

@@ -20,7 +20,7 @@ class DemoShaderParticles extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/particles.fp")
+      g.setShader("examples/shader/particles.fp")
     }
 
     g.clear()

@@ -12,7 +12,7 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject
  * @version 2.0
  */
 class Ball(var posx: Float, var posy: Float) extends DrawableObject {
-  private val img = new BitmapImage("images/soccer.png")
+  private val img = new BitmapImage("examples/images/soccer.png")
 
   override def draw(g: GdxGraphics): Unit = {
     draw(g, 1.0f)

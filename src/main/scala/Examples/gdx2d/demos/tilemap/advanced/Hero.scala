@@ -26,7 +26,7 @@ class Hero(initialPosition: Vector2) extends DrawableObject {
   private val nFrames: Int = 4
   private val FRAME_TIME = 0.1f // Duration of each frame
 
-  private val ss = new Spritesheet("images/lumberjack_sheet32.png", Hero.SPRITE_WIDTH, Hero.SPRITE_HEIGHT)
+  private val ss = new Spritesheet("examples/images/lumberjack_sheet32.png", Hero.SPRITE_WIDTH, Hero.SPRITE_HEIGHT)
 
   private var lastPosition = new Vector2(initialPosition)
   private var newPosition = new Vector2(initialPosition)

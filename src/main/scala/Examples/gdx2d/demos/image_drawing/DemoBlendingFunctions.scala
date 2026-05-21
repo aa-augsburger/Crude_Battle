@@ -29,8 +29,8 @@ class DemoBlendingFunctions extends PortableApplication {
 
   override def onInit(): Unit = {
     setTitle("Blending functions for images, mui 2013")
-    imgBitmap = new BitmapImage("images/texture.png")
-    backgroundBitmap = new BitmapImage("images/back1_512.png")
+    imgBitmap = new BitmapImage("examples/images/texture.png")
+    backgroundBitmap = new BitmapImage("examples/images/back1_512.png")
     w = imgBitmap.getImage.getWidth.toFloat
     h = imgBitmap.getImage.getHeight.toFloat
   }

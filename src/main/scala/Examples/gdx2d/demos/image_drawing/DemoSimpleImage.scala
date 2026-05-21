@@ -18,7 +18,7 @@ class DemoSimpleImage extends PortableApplication {
 
   override def onInit(): Unit = {
     setTitle("Simple image drawing, mui 2013")
-    imgBitmap = new BitmapImage("images/compass_150.png")
+    imgBitmap = new BitmapImage("examples/images/compass_150.png")
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

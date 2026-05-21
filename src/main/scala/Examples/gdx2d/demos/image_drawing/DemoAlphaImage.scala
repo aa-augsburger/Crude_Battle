@@ -27,8 +27,8 @@ class DemoAlphaImage extends PortableApplication {
 
   override def onInit(): Unit = {
     setTitle("Alpha transparency modification for images, mui 2013")
-    imgBitmap = new BitmapImage("images/Android_PI_48x48.png")
-    backgroundBitmap = new BitmapImage("images/back1_512.png")
+    imgBitmap = new BitmapImage("examples/images/Android_PI_48x48.png")
+    backgroundBitmap = new BitmapImage("examples/images/back1_512.png")
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

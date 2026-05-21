@@ -29,7 +29,7 @@ class DemoSpriteSheet extends PortableApplication {
 
   override def onInit(): Unit = {
     setTitle("SpriteSheet demo")
-    ss = new Spritesheet("images/lumberjack_sheet.png", SPRITE_WIDTH, SPRITE_HEIGHT)
+    ss = new Spritesheet("examples/images/lumberjack_sheet.png", SPRITE_WIDTH, SPRITE_HEIGHT)
     Logger.log("Press up/down to change the current animation")
   }
 

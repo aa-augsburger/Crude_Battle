@@ -26,8 +26,8 @@ class DemoJulia extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/julia.fp")
-      g.getShaderRenderer.addTexture("shader/pal.png", "texture0")
+      g.setShader("examples/shader/julia.fp")
+      g.getShaderRenderer.addTexture("examples/shader/pal.png", "texture0")
     }
 
     g.getShaderRenderer.setUniform("scale", scale)

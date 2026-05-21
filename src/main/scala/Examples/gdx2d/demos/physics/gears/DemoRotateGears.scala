@@ -61,10 +61,10 @@ class DemoRotateGears extends PortableApplication(512, 256) {
     setTitle("Simple rotate gears demo, pim 2015")
     debugRenderer = new DebugRenderer()
 
-    bitmapClock = new BitmapImage("images/clock.png")
-    bitmapSecond = new BitmapImage("images/clock_second.png")
-    bitmapMinute = new BitmapImage("images/clock_minute.png")
-    bitmapHour = new BitmapImage("images/clock_hour.png")
+    bitmapClock = new BitmapImage("examples/images/clock.png")
+    bitmapSecond = new BitmapImage("examples/images/clock_second.png")
+    bitmapMinute = new BitmapImage("examples/images/clock_minute.png")
+    bitmapHour = new BitmapImage("examples/images/clock_hour.png")
 
     val frame = new PhysicsStaticBox("frame", CLOCK_CENTER, 10f, 10f)
 

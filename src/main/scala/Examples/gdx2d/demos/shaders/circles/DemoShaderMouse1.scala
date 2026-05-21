@@ -20,7 +20,7 @@ class DemoShaderMouse1 extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/circles/circle1.fp")
+      g.setShader("examples/shader/circles/circle1.fp")
       g.getShaderRenderer.setUniform("center", c.pos)
     }
 

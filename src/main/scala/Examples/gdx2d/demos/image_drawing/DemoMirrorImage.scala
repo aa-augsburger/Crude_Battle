@@ -17,7 +17,7 @@ class DemoMirrorImage extends PortableApplication {
 
   override def onInit(): Unit = {
     setTitle("Mirror image drawing, mui 2013")
-    imgBitmap = new BitmapImage("images/Android_PI_48x48.png")
+    imgBitmap = new BitmapImage("examples/images/Android_PI_48x48.png")
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

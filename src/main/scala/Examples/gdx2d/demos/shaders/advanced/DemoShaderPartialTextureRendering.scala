@@ -19,7 +19,7 @@ class DemoShaderPartialTextureRendering extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/bicolor.fp", 200, 200)
+      g.setShader("examples/shader/bicolor.fp", 200, 200)
     }
 
     g.clear()

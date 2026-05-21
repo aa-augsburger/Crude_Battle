@@ -32,15 +32,15 @@ class DemoPerspective extends PortableApplication {
 
   override def onInit(): Unit = {
     setTitle("Postprocessing with a shader, mui 2013")
-    imageAndroid = new BitmapImage("images/Android_PI_48x48.png")
-    imageBackground = new BitmapImage("images/back1_512.png")
+    imageAndroid = new BitmapImage("examples/images/Android_PI_48x48.png")
+    imageBackground = new BitmapImage("examples/images/back1_512.png")
     fbo = new FrameBuffer(Format.RGBA8888, getWindowWidth, getWindowHeight, false)
     Logger.log("Click to enable/disable shader")
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/advanced/perspective.fp")
+      g.setShader("examples/shader/advanced/perspective.fp")
     }
 
     fbo.begin()

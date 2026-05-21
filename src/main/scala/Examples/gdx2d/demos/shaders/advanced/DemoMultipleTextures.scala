@@ -21,9 +21,9 @@ class DemoMultipleTextures extends PortableApplication {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     if (g.getShaderRenderer == null) {
-      g.setShader("shader/advanced/multiple_textures.fp")
-      g.getShaderRenderer.addTexture("images/lena.png", "texture0")
-      g.getShaderRenderer.addTexture("images/mandrill.jpg", "texture1")
+      g.setShader("examples/shader/advanced/multiple_textures.fp")
+      g.getShaderRenderer.addTexture("examples/images/lena.png", "texture0")
+      g.getShaderRenderer.addTexture("examples/images/mandrill.jpg", "texture1")
     }
 
     g.getShaderRenderer.setUniform("textureChosen", selectedTexture)

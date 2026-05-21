@@ -6,7 +6,7 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject
 
 /** An animated coin that scales with time. */
 class Coin(var posx: Int, var posy: Int) extends DrawableObject {
-  private val img = new BitmapImage("images/retro-coin.png")
+  private val img = new BitmapImage("examples/images/retro-coin.png")
   private var scale: Float = 0.4f
   private var direction: Float = 0.01f
 

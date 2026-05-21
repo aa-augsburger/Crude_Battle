@@ -6,7 +6,7 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject
 
 /** A simple brick that does nothing special. */
 class Brick(var posx: Int, var posy: Int) extends DrawableObject {
-  private val img = new BitmapImage("images/brick.png")
+  private val img = new BitmapImage("examples/images/brick.png")
 
   override def draw(g: GdxGraphics): Unit =
     g.drawPicture(posx.toFloat, posy.toFloat, img)
