@@ -3,10 +3,10 @@
   <component name="ScalaCompilerConfiguration">
     <option name="separateProdTestSources" value="true" />
     <profile name="sbt 1" modules="Crude Battle,Crude_Battle,Crude_Battle.main,Crude_Battle.test,MonProjetGDX2D,MonProjetGDX2D.main,MonProjetGDX2D.test" />
-    <profile name="sbt 3" modules="Crude Battle.main,Crude Battle.test">
+    <profile name="sbt 2" modules="Crude Battle.main,Crude Battle.test">
       <parameters>
         <parameter value="-release" />
-        <parameter value="17" />
+        <parameter value="8" />
       </parameters>
     </profile>
   </component>

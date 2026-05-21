@@ -29,6 +29,7 @@ class DemoCarDriving extends PortableApplication {
     world = PhysicsWorld.getInstance()
     world.setGravity(new Vector2(0f, 0f))
 
+
     dbgRenderer = new DebugRenderer()
 
     new PhysicsScreenBoundaries(getWindowWidth.toFloat, getWindowHeight.toFloat)

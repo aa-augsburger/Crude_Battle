@@ -35,7 +35,7 @@ object Terrain extends Enumeration {
   import scala.language.implicitConversions
   implicit def valueToPlanetVal(x: Value): TerrainVal = x.asInstanceOf[TerrainVal]
 
-  val blockSize = 4
+  val blockSize = 3
   val Dirt = TerrainVal(1, Color.GREEN)
   val Rock = TerrainVal(3, Color.GRAY)
   val Air = TerrainVal(0, Color.BLUE)

@@ -2,7 +2,6 @@ package Examples.gdx2d.demos.physics.motors
 
 import java.text.SimpleDateFormat
 import java.util.Date
-
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.physics.PhysicsMotor
 import ch.hevs.gdx2d.components.physics.utils.{PhysicsConstants, PhysicsScreenBoundaries}
@@ -39,6 +38,7 @@ class DemoRotateMotor extends PortableApplication(512, 256) {
 
   override def onInit(): Unit = {
     setTitle("Simple rotate motor demo, hit, mei 2014")
+    com.badlogic.gdx.physics.box2d.Box2D.init()
 
     new PhysicsScreenBoundaries(getWindowWidth.toFloat, getWindowHeight.toFloat)
 
