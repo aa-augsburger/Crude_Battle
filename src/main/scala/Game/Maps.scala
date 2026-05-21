@@ -63,23 +63,6 @@ class Maps{
       }
     }
   }
-  def setBlock(x: Int, y: Int, terrain: TerrainType): Unit = {
-    if (x >= 0 && x < largeur &&
-      y >= 0 && y < hauteur) {
-      grille(x)(y) = terrain
-    }
-  }
-  def getBlock(x: Int, y: Int): TerrainType = {
-    if (x >= 0 && x < largeur &&
-      y >= 0 && y < hauteur) {
-
-      grille(x)(y)
-
-    } else {
-
-      Air
-    }
-  }
   //fonction destruction de terrain
   //defndestruction(x: Int, y: Int, radius: Int): Unit = {
   //  for (i <- -radius to radius;
