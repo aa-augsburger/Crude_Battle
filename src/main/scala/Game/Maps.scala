@@ -3,15 +3,18 @@ package Game
 import ch.hevs.gdx2d.lib.GdxGraphics
 
 
-class Maps(lenght: Int = 1920, height: Int = 1080) {
+class Maps(length: Int = 1920, height: Int = 1080) {
 
-  val world: Array[Float] = new Array[Float](lenght)
+  val world: Array[Float] = new Array[Float](length)
 
   def initMaps(): Unit = {
+   val r = (Math.random()*10)%5+1
     for(x <- world.indices) {
-      world(x) = 500f
+      val a = x * (0.001f)*r
+      val s = Math.sin(a) + Math.sin(Math.E * a) + Math.sin(Math.PI * a)
+      println(s)
+      world(x) = 400f + s.toFloat*100f
     }
-
   }
 
 

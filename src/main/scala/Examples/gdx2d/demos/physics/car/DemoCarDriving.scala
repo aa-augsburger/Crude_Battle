@@ -1,5 +1,6 @@
 package Examples.gdx2d.demos.physics.car
 
+import Examples.gdx2d.demos.physics.car.components.Car
 import ch.hevs.gdx2d.components.physics.utils.PhysicsScreenBoundaries
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.desktop.physics.DebugRenderer
@@ -9,7 +10,6 @@ import ch.hevs.gdx2d.lib.utils.Logger
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
-import components.Car
 /**
  * Shows how to make a top-down car with physics.
  *
