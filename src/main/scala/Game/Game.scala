@@ -33,6 +33,7 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
 
 
 
+
     //Render the graphic
 
     if (myMaps != null) {
@@ -41,14 +42,20 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
 
 
     //Draw the tank
-    var c = 5
     val deltaY = myMaps.dirt(myTank.posX+30)-myMaps.dirt(myTank.posX-30)
-    val angle = Math.atan2(deltaY, myTank.length)
-    c = c * Math.signum(angle).toInt
-    g.drawFilledRectangle(myTank.posX-15, myMaps.dirt(myTank.posX+c), myTank.length, 30, Math.toDegrees(angle).toFloat, Color.RED)
+    myTank.tankAngle = Math.atan2(deltaY, myTank.length).toFloat // angle du tank en radian
+    val cx = (-15f*Math.cos(1.57-myTank.tankAngle)).toFloat
+    val cy = (15f*Math.sin(1.57-myTank.tankAngle)).toFloat
+    g.drawFilledRectangle(myTank.posX+cx, myMaps.dirt(myTank.posX)+cy, myTank.length, 30, Math.toDegrees(myTank.tankAngle).toFloat, Color.RED)
 
     //Draw the tourette
-    g.drawFilledRectangle(myTank.posX-15, myMaps.dirt(myTank.posX+15), 5, 30, myTank.turretAngle, Color.GREEN)
+    myTank.updateTurretAngle()
+    var dx = 15f*Math.cos(myTank.turretAngle.toRadians)
+    var dy = 15*Math.sin(myTank.turretAngle.toRadians)
+    var turretX: Float = (myTank.posX+cx+dx).toFloat
+    var turretY = (myMaps.dirt(myTank.posX)+cy+dy).toFloat
+    g.drawFilledRectangle(turretX,turretY , 30, 5, myTank.turretAngle, Color.GREEN)
+    if (Gdx.input.isKeyPressed(Input.Keys.D)) println(s"angle : ${myTank.tankAngle}, X : $turretX, Y : $turretY --- tank : ${myTank.posX} - ${myMaps.dirt(myTank.posX)}")
 
     //Draw the shot
     if(myTank.shot.isFired) {

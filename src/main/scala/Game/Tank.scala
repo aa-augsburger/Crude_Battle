@@ -10,6 +10,7 @@ class Tank {
   var posX = 500
   var speed = 3
   var turretAngle = 0f
+  var tankAngle: Float = 0
 
   def moveLeft(): Unit = {
     if(posX > speed + length/2) posX -= speed
@@ -32,18 +33,24 @@ class Tank {
 
   def fire(tankY: Float): Unit = {
     print("init Fire")
-    shot.initFire(posX, tankY, turretAngle)
+    shot.initFire(posX, tankY, tankAngle, turretAngle)
   }
 
   def turretUp(): Unit = {
-    if(turretAngle < 90) turretAngle += 1
+    if(turretAngle < tankAngle.toDegrees+180) turretAngle += 1
+    else turretAngle = tankAngle.toDegrees+180
     println(turretAngle)
   }
 
   def turretDown(): Unit = {
-    if(turretAngle > -90) turretAngle -= 1
+    if(turretAngle > tankAngle.toDegrees) turretAngle -= 1
+    else turretAngle = tankAngle.toDegrees
     println(turretAngle)
+  }
 
+  def updateTurretAngle(): Unit = {
+    if(turretAngle < tankAngle.toDegrees) turretAngle = tankAngle.toDegrees
+    if(turretAngle > (tankAngle.toDegrees + 180)) turretAngle = tankAngle.toDegrees + 180
   }
 
 }
