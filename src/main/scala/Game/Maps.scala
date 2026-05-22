@@ -10,6 +10,7 @@ class Maps(length: Int = 1920, height: Int = 1080) {
   val rock: Array[Float] = new Array[Float](length)
 
   def initMaps(): Unit = {
+    //https://www.geogebra.org/graphing/yzgxvd8q
    val r = (Math.random()*10)%5+1
     val d = (Math.random()*100)
     for(x <- dirt.indices) {

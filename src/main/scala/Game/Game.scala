@@ -56,6 +56,9 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
       g.drawFilledCircle(myTank.shot.X, myTank.shot.Y, 5, Color.BLACK)
     }
 
+    //COllision
+    if(myTank.shot.Y < myMaps.dirt(myTank.shot.X.toInt)) myTank.shot.isFired = false
+
   }
 }
 

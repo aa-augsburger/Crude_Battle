@@ -16,6 +16,8 @@ class Shot {
 
   def initFire(tankX: Float, tankY: Float, angle: Float): Unit = {
     print("init Fire")
+
+    // https://www.omnicalculator.com/fr/physique/calculateur-trajectoire-parabolique
     val correctedAngle = (angle+90).toRadians
     X = tankX
     Y = tankY
