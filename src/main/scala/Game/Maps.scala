@@ -22,7 +22,7 @@ class Maps(length: Int = 1920, height: Int = 1080) {
 
     def refreshMaps(g: GdxGraphics): Unit = {
       for(x <- dirt.indices) {
-        g.drawLine(x,0, x, dirt(x), Color.BLACK)
+        g.drawLine(x,0, x, dirt(x))
       }
     }
 
