@@ -27,7 +27,9 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) myTank.moveRight()
     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) myTank.turretUp()
     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) myTank.turretDown()
-    if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) ???
+    if (Gdx.input.isKeyPressed(Input.Keys.Q)) myTank.pwrDown()
+    if (Gdx.input.isKeyPressed(Input.Keys.W)) myTank.pwrUp()
+    if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) myTank.fire(myMaps.dirt(myTank.posX))
 
 
 
@@ -42,12 +44,17 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
     var c = 5
     val deltaY = myMaps.dirt(myTank.posX+30)-myMaps.dirt(myTank.posX-30)
     val angle = Math.atan2(deltaY, myTank.length)
-    println(angle)
     c = c * Math.signum(angle).toInt
-    g.drawFilledRectangle(myTank.getPos-15, myMaps.dirt(myTank.getPos+c), myTank.length, 30, Math.toDegrees(angle).toFloat, Color.RED)
+    g.drawFilledRectangle(myTank.posX-15, myMaps.dirt(myTank.posX+c), myTank.length, 30, Math.toDegrees(angle).toFloat, Color.RED)
 
     //Draw the tourette
-    g.drawFilledRectangle(myTank.getPos-15, myMaps.dirt(myTank.getPos+15), 5, 30, Math.toDegrees(myTank.turretAngle).toFloat, Color.GREEN)
+    g.drawFilledRectangle(myTank.posX-15, myMaps.dirt(myTank.posX+15), 5, 30, myTank.turretAngle, Color.GREEN)
+
+    //Draw the shot
+    if(myTank.shot.isFired) {
+      myTank.shot.updateShot()
+      g.drawFilledCircle(myTank.shot.X, myTank.shot.Y, 5, Color.BLACK)
+    }
 
   }
 }
