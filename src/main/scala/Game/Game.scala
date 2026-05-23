@@ -5,7 +5,7 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
 
-class Game extends PortableApplication(1920, 1080) { // On passe la taille de la fenêtre ici
+class Game(WIDTH: Int = 1920,HEIGHT: Int = 1080) extends PortableApplication(WIDTH, HEIGHT) { // On passe la taille de la fenêtre ici
   var myMaps: Maps = _
   var myTank: Tank = _
 
@@ -13,7 +13,8 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
 
   override def onInit(): Unit = {
     setTitle("Crude Battle")
-    myMaps = new Maps()
+
+    myMaps = new Maps(WIDTH, HEIGHT)
     myTank = new Tank()
     myMaps.initMaps()
   }
@@ -58,7 +59,7 @@ class Game extends PortableApplication(1920, 1080) { // On passe la taille de la
     if (Gdx.input.isKeyPressed(Input.Keys.D)) println(s"angle : ${myTank.tankAngle}, X : $turretX, Y : $turretY --- tank : ${myTank.posX} - ${myMaps.dirt(myTank.posX)}")
 
     //Draw the shot
-    if(myTank.shot.isFired) {
+    if(myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH-myTank.shot.Vx) {
       myTank.shot.updateShot()
       g.drawFilledCircle(myTank.shot.X, myTank.shot.Y, 5, Color.BLACK)
     }
