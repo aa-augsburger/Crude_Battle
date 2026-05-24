@@ -4,6 +4,10 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 
 class Tank {
   val length = 60
+  val height = 30
+
+  val turrentLenght = 30
+  val turrentWidth = 5
 
 
   var shot = new Shot()
@@ -33,7 +37,7 @@ class Tank {
 
   def fire(tankY: Float): Unit = {
     print("init Fire")
-    shot.initFire(posX, tankY, tankAngle, turretAngle)
+    shot.initFire(posX, tankY, tankAngle, turretAngle, height, turrentLenght)
   }
 
   def turretUp(): Unit = {

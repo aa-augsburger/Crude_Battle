@@ -14,15 +14,16 @@ class Shot {
   var Vo: Float = 5f
   var isFired: Boolean = false
 
-  def initFire(tankX: Float, tankY: Float, tankAngle: Float, turretAngle: Float): Unit = {
+  def initFire(tankX: Float, tankY: Float, tankAngle: Float, turretAngle: Float, tankLenght: Float, turrentLenght: Float): Unit = {
     print("init Fire")
+    val half = tankLenght / 2
 
     // https://www.omnicalculator.com/fr/physique/calculateur-trajectoire-parabolique
     val radAngle = (turretAngle ).toRadians
-    val cx = (-15f*Math.cos(1.57-tankAngle)).toFloat
-    val cy = (15f*Math.sin(1.57-tankAngle)).toFloat
-    var dx = 30f*Math.cos(turretAngle.toRadians).toFloat
-    var dy = 30*Math.sin(turretAngle.toRadians).toFloat
+    val cx = (-half*Math.cos(1.57-tankAngle)).toFloat
+    val cy = (half*Math.sin(1.57-tankAngle)).toFloat
+    var dx = turrentLenght*Math.cos(turretAngle.toRadians).toFloat
+    var dy = turrentLenght*Math.sin(turretAngle.toRadians).toFloat
     X = tankX + cx + dx
     Y = tankY + cy + dy
     Vx = (Vo * Math.cos(radAngle)).toFloat
