@@ -1,4 +1,4 @@
-package Game
+package PGame
 
 class Shot extends DrawableShot {
   //Position du tir

@@ -1,4 +1,4 @@
-package Game
+package PGame
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.Gdx
@@ -30,7 +30,7 @@ trait GameGUI {
     newGameButton.addListener(
       new ClickListener {
         override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-          initGame()
+          guiState = GUIState.INIT_GAME
         }
       }
     )
@@ -48,7 +48,6 @@ trait GameGUI {
       }
     )
 
-    if(debug) initGame()
     stage.addActor(textArea)
     stage.addActor(newGameButton)
     stage.addActor(quitButton)
@@ -67,5 +66,4 @@ trait GameGUI {
     }
     false
   }
-
 }

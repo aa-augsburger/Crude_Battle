@@ -1,11 +1,12 @@
-package Game
+package PGame
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
-class EnemyTank extends Tank  {
+trait AutoTank {
 
-  posX = 1400
+  this: Tank =>
+
   speed = 2
   private var direction = 1
 

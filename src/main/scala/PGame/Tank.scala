@@ -1,9 +1,9 @@
-package Game
+package PGame
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
-class Tank extends DrawableTank {
+class Tank(initPos: Int = 300) extends DrawableTank {
   val length = 60
   val height = 30
 
@@ -12,7 +12,7 @@ class Tank extends DrawableTank {
 
 
   var shot = new Shot()
-  var posX = 500
+  var posX =  initPos
   var speed = 3
   var turretAngle = 0f
   var tankAngle: Float = 0
@@ -57,6 +57,5 @@ class Tank extends DrawableTank {
     if(turretAngle < tankAngle.toDegrees) turretAngle = tankAngle.toDegrees
     if(turretAngle > (tankAngle.toDegrees + 180)) turretAngle = tankAngle.toDegrees + 180
   }
-  
 
 }

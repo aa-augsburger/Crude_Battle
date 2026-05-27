@@ -1,4 +1,4 @@
-package Game
+package PGame
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
@@ -61,5 +61,6 @@ class Maps(length: Int, height: Int) {
     }
 
   }
+
 
 }
