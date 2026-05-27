@@ -9,71 +9,25 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton, TextField}
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
-class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, debug: Boolean = true)
-  extends PortableApplication(WIDTH, HEIGHT) {
-
+class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, val debug: Boolean = true) extends PortableApplication(WIDTH, HEIGHT) with GameInput with GameGUI {
 
   var myMaps: Maps = _
   var myTank: Tank = _
   var enemyTank: EnemyTank = _
 
+  var stage: Stage = _
+  var skin: Skin = _
 
-  private var stage: Stage = _
-  private var skin: Skin = _
-
-  private var newGameButton: TextButton = _
-  private var quitButton: TextButton = _
-  private var textArea: TextField = _
+  var newGameButton: TextButton = _
+  var quitButton: TextButton = _
+  var textArea: TextField = _
 
   // false = menu
   // true = jeu
-  private var gameStarted = false
+  var gameStarted = false
 
   override def onInit(): Unit = {
-
-    setTitle("Crude Battle")
-
-    stage = new Stage()
-    Gdx.input.setInputProcessor(stage)
-    skin =
-      new Skin(Gdx.files.internal("examples/ui/uiskin.json"))
-    textArea = new TextField("", skin)
-    textArea.setSize(250, 40)
-    textArea.setPosition(getWindowWidth / 2f - 125, getWindowHeight * 0.75f)
-
-    textArea.setMessageText("Nom du joueur")
-    newGameButton =
-      new TextButton("Nouvelle Partie", skin)
-    newGameButton.setSize(220, 45)
-    newGameButton.setPosition(getWindowWidth / 2f - 110, getWindowHeight * 0.55f)
-
-    newGameButton.addListener(
-      new ClickListener {
-        override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-          initGame()
-        }
-      }
-    )
-
-    quitButton =
-      new TextButton("Quitter", skin)
-
-    quitButton.setSize(220, 45)
-
-    quitButton.setPosition(getWindowWidth / 2f - 110, getWindowHeight * 0.42f)
-
-    quitButton.addListener(
-      new ClickListener {
-        override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-          Gdx.app.exit()
-        }
-      }
-    )
-
-    if(debug) initGame()
-    stage.addActor(textArea)
-    stage.addActor(newGameButton) 
-    stage.addActor(quitButton)
+    initGUI()
   }
 
   def initGame(): Unit = {
@@ -127,23 +81,14 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, debug: Boolean = true)
       return
     }
 
-    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) myTank.moveLeft()
-    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) myTank.moveRight()
-    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) myTank.turretUp()
-    if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) myTank.turretDown()
-    if (Gdx.input.isKeyPressed(Input.Keys.Q)) myTank.pwrDown()
-    if (Gdx.input.isKeyPressed(Input.Keys.W)) myTank.pwrUp()
-    if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) myTank.fire(myMaps.dirt(myTank.posX))
-    if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-      gameStarted = false
-      stage.addActor(textArea)
-      stage.addActor(newGameButton)
-      stage.addActor(quitButton)
-    }
+    tankInput()
+    gameInput()
+
     myMaps.refreshMaps(g)
     drawPlayerTank(g)
     enemyTank.updateEnemy()
     enemyTank.draw(g, myMaps)
+
     if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx
     ) {
 
