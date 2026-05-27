@@ -3,7 +3,7 @@ package PGame
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
-class Tank(initPos: Int = 300) extends DrawableTank {
+class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
   val length = 60
   val height = 30
 
@@ -17,12 +17,32 @@ class Tank(initPos: Int = 300) extends DrawableTank {
   var turretAngle = 0f
   var tankAngle: Float = 0
 
+  def adaptSpeedAngle(isRight: Boolean): Int = {
+    val angle = if(isRight) getTankAngle(posX+length/4) else getTankAngle(posX-length/4)
+    println(angle)
+    var newSpeed = speed
+    // On bloque le tank si trop de pente
+    if(isRight && angle >= 1) newSpeed = 0
+    if(!isRight && angle <= -1) newSpeed = 0
+
+//
+//    //on acceler le tank si ca descend
+//    if(isRight && angle < 1.2) newSpeed -
+//    if(!isRight && angle < -1.2) newSpeed = 0
+
+    newSpeed
+  }
+
   def moveLeft(): Unit = {
-    if(posX > speed + length/2) posX -= speed
+    if(posX > speed + length/2) {
+      posX -= adaptSpeedAngle(false)
+    }
   }
 
   def moveRight(): Unit = {
-    if(posX < 1920-speed - length/2) posX += speed
+    if(posX < 1920-speed - length/2) {
+      posX += adaptSpeedAngle(true)
+    }
 
   }
 
@@ -54,8 +74,15 @@ class Tank(initPos: Int = 300) extends DrawableTank {
   }
 
   def updateTurretAngle(): Unit = {
-    if(turretAngle < tankAngle.toDegrees) turretAngle = tankAngle.toDegrees
-    if(turretAngle > (tankAngle.toDegrees + 180)) turretAngle = tankAngle.toDegrees + 180
+    val angle = getTankAngle(posX)
+    if(turretAngle < angle.toDegrees) turretAngle =angle.toDegrees
+    if(turretAngle > (angle.toDegrees + 180)) turretAngle = angle.toDegrees + 180
+  }
+
+  def getTankAngle(x: Int = posX): Float = {
+    val deltaY = myMaps.surface(x + length/2) - myMaps.surface(x - length/2)
+    val result = Math.atan2(deltaY, length).toFloat
+    result
   }
 
 }

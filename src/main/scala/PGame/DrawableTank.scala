@@ -5,12 +5,9 @@ import com.badlogic.gdx.graphics.Color
 
 trait DrawableTank {
   this: Tank =>
-  def drawTank(g: GdxGraphics, myMaps: Maps, c: Color) = {
-    val deltaY = myMaps.surface(posX + height) - myMaps.surface(posX - height)
-
-    val halfHeight: Float = height / 2
-
-    tankAngle = Math.atan2(deltaY, length).toFloat
+  def drawTank(g: GdxGraphics, c: Color) = {
+    val tankAngle = getTankAngle()
+    val halfHeight = height/2
 
     val cx = (-halfHeight * Math.cos(1.57 - tankAngle)).toFloat
     val cy = (halfHeight * Math.sin(1.57 - tankAngle)).toFloat
