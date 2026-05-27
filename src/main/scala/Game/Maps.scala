@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color
 
 class Maps(length: Int, height: Int) {
 
+
   val dirt: Array[Float] = new Array[Float](length)
   val surface: Array[Float] = new Array[Float](length)
   val ceiling: Array[Float] = new Array[Float](length)

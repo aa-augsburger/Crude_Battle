@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton, TextField}
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
-class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080)
+class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, debug: Boolean = true)
   extends PortableApplication(WIDTH, HEIGHT) {
 
 
@@ -50,12 +50,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080)
     newGameButton.addListener(
       new ClickListener {
         override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-          gameStarted = true
-          stage.clear()
-          myMaps = new Maps(WIDTH, HEIGHT)
-          myTank = new Tank()
-          enemyTank = new EnemyTank()
-          myMaps.initMaps()
+          initGame()
         }
       }
     )
@@ -75,9 +70,19 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080)
       }
     )
 
+    if(debug) initGame()
     stage.addActor(textArea)
-    stage.addActor(newGameButton)
+    stage.addActor(newGameButton) 
     stage.addActor(quitButton)
+  }
+
+  def initGame(): Unit = {
+    gameStarted = true
+    stage.clear()
+    myMaps = new Maps(WIDTH, HEIGHT)
+    myTank = new Tank()
+    enemyTank = new EnemyTank()
+    myMaps.initMaps()
   }
 
   def drawPlayerTank(g: GdxGraphics): Unit = {

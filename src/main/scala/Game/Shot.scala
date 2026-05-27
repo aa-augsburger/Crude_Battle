@@ -1,16 +1,20 @@
 package Game
 
 class Shot {
+  //Position du tir
   var X: Float = 0f
   var Y: Float = 0f
 
-  var Xo: Float = 0f
-  var Yo: Float = 0f
-
+//Vitesse du tir
   var Vx: Float = 0f
   var Vy: Float = 0f
 
-
+  //Variable physique
+  var G = -0.1f  //gravite
+  var weight: Float = -0f //poid addition
+  var wind: Float = 0f //vent add
+  var thrust: Float = 1f // mutliplicaton
+  //Vitesse initiaile
   var Vo: Float = 5f
   var isFired: Boolean = false
 
@@ -40,7 +44,11 @@ class Shot {
   def updateShot(): Unit = {
     X += Vx
     Y += Vy
-    Vy -= 0.1f //gravité
-
+    Vy += G //gravité
+    Vy += weight //weight
+    Vx -= wind //wind
+    //Thrust
+    Vx *= thrust
+    Vy *= thrust
   }
 }
