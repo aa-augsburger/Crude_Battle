@@ -24,6 +24,9 @@ class Shot {
     val cy = (half*Math.sin(1.57-tankAngle)).toFloat
     var dx = turrentLenght*Math.cos(turretAngle.toRadians).toFloat
     var dy = turrentLenght*Math.sin(turretAngle.toRadians).toFloat
+
+    // Calcul des paramètres du tir
+
     X = tankX + cx + dx
     Y = tankY + cy + dy
     Vx = (Vo * Math.cos(radAngle)).toFloat
