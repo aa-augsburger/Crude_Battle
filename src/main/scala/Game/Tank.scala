@@ -1,8 +1,9 @@
 package Game
 
 import ch.hevs.gdx2d.lib.GdxGraphics
+import com.badlogic.gdx.graphics.Color
 
-class Tank {
+class Tank extends DrawableTank {
   val length = 60
   val height = 30
 
@@ -56,5 +57,6 @@ class Tank {
     if(turretAngle < tankAngle.toDegrees) turretAngle = tankAngle.toDegrees
     if(turretAngle > (tankAngle.toDegrees + 180)) turretAngle = tankAngle.toDegrees + 180
   }
+  
 
 }

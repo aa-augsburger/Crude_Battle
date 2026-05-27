@@ -39,32 +39,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, val debug: Boolean = true) ext
     myMaps.initMaps()
   }
 
-  def drawPlayerTank(g: GdxGraphics): Unit = {
 
-    val deltaY = myMaps.surface(myTank.posX + myTank.height) - myMaps.surface(myTank.posX - myTank.height)
-
-    val halfHeight: Float = myTank.height / 2
-
-    myTank.tankAngle = Math.atan2(deltaY, myTank.length).toFloat
-
-    val cx = (-halfHeight * Math.cos(1.57 - myTank.tankAngle)).toFloat
-    val cy = (halfHeight * Math.sin(1.57 - myTank.tankAngle)).toFloat
-
-    // Corps
-    g.drawFilledRectangle(myTank.posX + cx, myMaps.surface(myTank.posX) + cy, myTank.length, myTank.height, Math.toDegrees(myTank.tankAngle).toFloat, Color.RED)
-
-    // Tourelle
-    myTank.updateTurretAngle()
-
-    val hTLength = myTank.turrentLenght / 2
-
-    val dx = hTLength * Math.cos(myTank.turretAngle.toRadians)
-    val dy = hTLength * Math.sin(myTank.turretAngle.toRadians)
-    val turretX: Float = (myTank.posX + cx + dx).toFloat
-    val turretY = (myMaps.surface(myTank.posX) + cy + dy).toFloat
-
-    g.drawFilledRectangle(turretX, turretY, myTank.turrentLenght, myTank.turrentWidth, myTank.turretAngle, Color.BLACK)
-  }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
@@ -85,9 +60,9 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, val debug: Boolean = true) ext
     gameInput()
 
     myMaps.refreshMaps(g)
-    drawPlayerTank(g)
+    myTank.drawTank(g, myMaps, Color.RED)
     enemyTank.updateEnemy()
-    enemyTank.draw(g, myMaps)
+    enemyTank.drawTank(g, myMaps, Color.GREEN)
 
     if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx
     ) {
