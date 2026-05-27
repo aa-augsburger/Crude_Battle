@@ -1,5 +1,6 @@
 package Game
 
+import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.ui.Table.Debug
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
@@ -34,11 +35,9 @@ trait GameGUI {
       }
     )
 
-    quitButton =
-      new TextButton("Quitter", skin)
+    quitButton = new TextButton("Quitter", skin)
 
     quitButton.setSize(220, 45)
-
     quitButton.setPosition(getWindowWidth / 2f - 110, getWindowHeight * 0.42f)
 
     quitButton.addListener(
@@ -53,6 +52,20 @@ trait GameGUI {
     stage.addActor(textArea)
     stage.addActor(newGameButton)
     stage.addActor(quitButton)
+  }
+
+  def updateStage(g: GdxGraphics): Boolean = {
+    if (!gameStarted) {
+      stage.act()
+      stage.draw()
+      g.drawStringCentered(
+        getWindowHeight / 4f,
+        s"Joueur : ${textArea.getText}"
+      )
+      g.drawFPS()
+      return true
+    }
+    false
   }
 
 }

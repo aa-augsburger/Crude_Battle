@@ -1,6 +1,6 @@
 package Game
 
-class Shot {
+class Shot extends DrawableShot {
   //Position du tir
   var X: Float = 0f
   var Y: Float = 0f

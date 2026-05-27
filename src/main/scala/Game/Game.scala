@@ -45,16 +45,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, val debug: Boolean = true) ext
 
     g.clear(Color.LIGHT_GRAY)
 
-    if (!gameStarted) {
-      stage.act()
-      stage.draw()
-      g.drawStringCentered(
-        getWindowHeight / 4f,
-        s"Joueur : ${textArea.getText}"
-      )
-      g.drawFPS()
-      return
-    }
+    if (updateStage(g)) return
 
     tankInput()
     gameInput()
@@ -64,17 +55,9 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, val debug: Boolean = true) ext
     enemyTank.updateEnemy()
     enemyTank.drawTank(g, myMaps, Color.GREEN)
 
-    if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx
-    ) {
-
+    if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx) {
       myTank.shot.updateShot()
-
-      g.drawFilledCircle(
-        myTank.shot.X,
-        myTank.shot.Y,
-        5,
-        Color.BLACK
-      )
+      myTank.shot.drawShot(g, myTank)
     }
     // COLLISION
     if (myTank.shot.Y < myMaps.surface(myTank.shot.X.toInt) && myTank.shot.isFired) {
@@ -83,6 +66,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, val debug: Boolean = true) ext
     }
     g.drawFPS()
   }
+
 
   override def onDispose(): Unit = {
     super.onDispose()
