@@ -176,15 +176,13 @@ class Game(
       }
     }
 
-    // Collision avec le sol
+    // Collision
     if (
       myTank.shot.Y <
         myMaps.surface(myTank.shot.X.toInt) &&
         myTank.shot.isFired
     ) {
-
       myTank.shot.isFired = false
-
       myMaps.explosion(
         myTank.shot.X.toInt,
         myMaps.surface(myTank.shot.X.toInt).toInt,
