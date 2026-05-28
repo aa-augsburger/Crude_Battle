@@ -4,7 +4,7 @@ import com.badlogic.gdx.{Gdx, Input}
 
 trait GameInput {
   this: Game =>
-  def tankInput(): Boolean = {
+  def tankInput(myTank: Tank): Boolean = {
     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) myTank.moveLeft()
     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) myTank.moveRight()
     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) myTank.turretUp()

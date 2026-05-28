@@ -8,17 +8,17 @@ trait GameLogic {
 
   def aiming(): Unit = {
     //  println("STATE AIMING")
-    if (tankInput()) {
-      myTank.shot.hasAlreadyHit = false
+    if (tankInput(currTank)) {
+      currTank.shot.hasAlreadyHit = false
       turnState = FLYING
     }
   }
 
   def flying(g: GdxGraphics): Unit = {
     // println(("STATE FLYING"))
-    if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIN_WIDTH - myTank.shot.Vx) {
-      myTank.shot.updateShot()
-      myTank.shot.drawShot(g, myTank)
+    if (currTank.shot.isFired && currTank.shot.X > -currTank.shot.Vx && currTank.shot.X < WIN_WIDTH - currTank.shot.Vx) {
+      currTank.shot.updateShot()
+      currTank.shot.drawShot(g, currTank)
     }
     // COLLISION
     // Collision avec enemy tank
@@ -27,21 +27,24 @@ trait GameLogic {
   }
 
   private def collisionWithTank(): Unit = {
-    if (myTank.shot.checkCollision(autoTank) && !myTank.shot.hasAlreadyHit) {
+    for(ennemyTank <- tankArray)
+      if(ennemyTank != currTank) {
+        if (currTank.shot.checkCollision(ennemyTank) && !currTank.shot.hasAlreadyHit) {
 
-      println("ENEMY TOUCHE")
+          println("ENEMY TOUCHE")
 
-      // dégâts
-      autoTank.takeDamage(20)
-      // arrêter projectile
-      myTank.shot.hasAlreadyHit = true
-    }
+          // dégâts
+          ennemyTank.takeDamage(20)
+          // arrêter projectile
+          currTank.shot.hasAlreadyHit = true
+        }
+      }
   }
 
   def collisionWithGround(): Unit = {
-    if (myTank.shot.Y < myMaps.surface(myTank.shot.X.toInt) && myTank.shot.isFired) {
-      myTank.shot.isFired = false
-      myMaps.explosion(myTank.shot.X.toInt, myMaps.surface(myTank.shot.X.toInt).toInt, 80)
+    if (currTank.shot.Y < myMaps.surface(currTank.shot.X.toInt) && currTank.shot.isFired) {
+      currTank.shot.isFired = false
+      myMaps.explosion(currTank.shot.X.toInt, myMaps.surface(currTank.shot.X.toInt).toInt, 80)
       turnState = LANDSLIDING
     }
   }

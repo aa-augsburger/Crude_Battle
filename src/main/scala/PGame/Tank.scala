@@ -3,13 +3,16 @@ package PGame
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
-class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
+class Tank(initPos: Int = 300, val tankColor: Color, val myMaps: Maps) extends DrawableTank {
   val length = 60
   val height = 30
 
-  var health: Int = 820
+  var health: Int = 100
   var isAlive: Boolean = true
   var X: Float = 0f
+  val isBot: Boolean = false
+
+
 
 
   val turrentLenght = 30
@@ -18,9 +21,14 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
 
   var shot = new Shot()
   var posX = initPos
+  var posY = myMaps.surface(posX)
   var speed = 3
   var turretAngle = 0f
   var tankAngle: Float = 0
+
+  def updateTank() = {
+    posY = myMaps.surface(posX)
+  }
 
   def takeDamage(damage: Int): Unit = {
     health -= damage
@@ -30,7 +38,6 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
       isAlive = false
       println("Tank détruit")
     }
-
     println("Vie restante : " + health)
   }
 
@@ -103,6 +110,7 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
     else turretAngle = tankAngle+180
     println(turretAngle)
   }
+
 
   def turretDown(): Unit = {
     tankAngle = getTankAngle(posX)

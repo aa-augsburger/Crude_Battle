@@ -19,7 +19,7 @@ class Maps(length: Int, height: Int) {
     for(x <- dirt.indices) {
       val a = (x+d) * (0.001f)*r
       val s = Math.sin(a) + Math.sin(Math.E * a) + Math.sin(Math.PI * a)
-      println(s)
+     // println(s)
       val h = 400f+ s.toFloat*100f
       dirt(x) = h
       surface(x) = h

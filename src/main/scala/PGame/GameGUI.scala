@@ -70,25 +70,20 @@ trait GameGUI {
 
   def updateGUIGame(g: GdxGraphics): Unit = {
 
-    myMaps.refreshMaps(g)
-    myTank.drawTank(g, Color.RED)
-    autoTank.updateEnemy()
-    autoTank.drawTank(g, Color.GREEN)
-    // Vie des tanks
+
+  }
+
+
+  def updateUITank(g: GdxGraphics, tank: Tank) = {
+    g.setColor(Color.BLACK)
     g.drawString(
-      50,
-      1000,
-      "Tank Rouge HP : " + myTank.health
+      tank.posX,
+      tank.posY+50,
+      "Tank Vert HP : " + tank.health,
+
     )
 
-    g.drawString(
-      1400,
-      1000,
-      "Tank Vert HP : " + autoTank.health
-    )
-
-    // Game Over
-    if (autoTank.health <= 0) {
+    if (tank.health <= 0) {
 
       g.drawString(
         WIN_WIDTH / 2 - 100,

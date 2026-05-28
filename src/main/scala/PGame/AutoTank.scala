@@ -8,11 +8,13 @@ trait AutoTank {
   this: Tank =>
 
   val isMovable: Boolean = true
+  override val isBot = true
+
   speed = 0
   private var direction = 1
 
-  def updateEnemy(): Unit = {
-
+  override def updateTank(): Unit = {
+    posY = myMaps.surface(posX)
     posX += direction * speed
 
     if(isMovable) {

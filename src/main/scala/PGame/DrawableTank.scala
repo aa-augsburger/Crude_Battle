@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color
 
 trait DrawableTank {
   this: Tank =>
-  def drawTank(g: GdxGraphics, c: Color) = {
+  def drawTank(g: GdxGraphics) = {
     val tankAngleRad = getTankAngle().toRadians
     val turretAngleRad = turretAngle.toRadians
     val halfHeight = height/2
@@ -14,7 +14,7 @@ trait DrawableTank {
     val cy = (halfHeight * Math.sin(1.57 - tankAngleRad)).toFloat
 
     // Corps
-    g.drawFilledRectangle(posX + cx, myMaps.surface(posX) + cy, length, height, Math.toDegrees(tankAngleRad).toFloat, c)
+    g.drawFilledRectangle(posX + cx, myMaps.surface(posX) + cy, length, height, Math.toDegrees(tankAngleRad).toFloat, tankColor)
 
     // Tourelle
     updateTurretAngle()
