@@ -7,7 +7,7 @@ trait AutoTank {
 
   this: Tank =>
 
-  val isMovable: Boolean = false
+  val isMovable: Boolean = true
   speed = 0
   private var direction = 1
 
@@ -20,7 +20,6 @@ trait AutoTank {
       if (posX < 1200) direction = 1
       if (posX > 1700) direction = -1
     }
-
 
     turretAngle += 0.3f
   }

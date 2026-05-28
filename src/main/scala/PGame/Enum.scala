@@ -8,5 +8,5 @@ object GameState extends Enumeration {
 
 object GUIState extends Enumeration {
   type GUIState = Value
-  val IN_MENU,INIT_GAME, PLAYING, PAUSED, WON = Value
+  val IN_MENU,INIT_GAME, PLAYING,CHANGE_PLAYER, PAUSED, WON = Value
 }

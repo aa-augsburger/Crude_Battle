@@ -118,9 +118,12 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
   }
 
   def getTankAngle(x: Int = posX): Float = {
-    val deltaY = myMaps.surface(x + length/2) - myMaps.surface(x - length/2)
-    val result = Math.atan2(deltaY, length).toFloat
-    result.toDegrees
+    if(x-length/2> 0 && x+length/2+speed < 1920) {
+      val deltaY = myMaps.surface(x + length/2) - myMaps.surface(x - length/2)
+      val result = Math.atan2(deltaY, length).toFloat
+      return result.toDegrees
+    }
+    0
   }
 
 }

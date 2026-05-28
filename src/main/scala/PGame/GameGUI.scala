@@ -2,6 +2,7 @@ package PGame
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Table.Debug
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton, TextField}
@@ -65,5 +66,35 @@ trait GameGUI {
       return true
     }
     false
+  }
+
+  def updateGUIGame(g: GdxGraphics): Unit = {
+
+    myMaps.refreshMaps(g)
+    myTank.drawTank(g, Color.RED)
+    autoTank.updateEnemy()
+    autoTank.drawTank(g, Color.GREEN)
+    // Vie des tanks
+    g.drawString(
+      50,
+      1000,
+      "Tank Rouge HP : " + myTank.health
+    )
+
+    g.drawString(
+      1400,
+      1000,
+      "Tank Vert HP : " + autoTank.health
+    )
+
+    // Game Over
+    if (autoTank.health <= 0) {
+
+      g.drawString(
+        WIN_WIDTH / 2 - 100,
+        WIN_HEIGHT / 2,
+        "VICTOIRE JOUEUR"
+      )
+    }
   }
 }

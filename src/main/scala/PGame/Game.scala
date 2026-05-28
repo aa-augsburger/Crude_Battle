@@ -1,6 +1,6 @@
 package PGame
 
-import PGame.GUIState.{GUIState, INIT_GAME, IN_MENU, PLAYING}
+import PGame.GUIState.{CHANGE_PLAYER, GUIState, INIT_GAME, IN_MENU, PLAYING}
 import PGame.GameState.{AIMING, FLYING, LANDSLIDING, TurnState}
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.GdxGraphics
@@ -8,13 +8,17 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton, TextField}
 
-class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: Int = 1, val nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIN_WIDTH, WIN_HEIGHT) with GameInput with GameGUI with GameLogic {
+import scala.collection.mutable.ArrayBuffer
+
+class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: Int = 2, val nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIN_WIDTH, WIN_HEIGHT) with GameInput with GameGUI with GameLogic {
 
   var tour: Int = 0
 
   var myMaps: Maps = _
   var myTank: Tank = _
   var autoTank: Tank with AutoTank = _
+
+  val tankArray: ArrayBuffer[Tank] = ArrayBuffer[Tank]()
 
   var guiState: GUIState = if(debug) INIT_GAME else IN_MENU
   var turnState: TurnState = AIMING
@@ -37,6 +41,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     }
   }
 
+
   def initGame(): Unit = {
     stage.clear()
     myMaps = new Maps(WIN_WIDTH, WIN_HEIGHT)
@@ -51,7 +56,12 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
       case IN_MENU => if (updateStage(g)) return
       case INIT_GAME => initGame()
       case PLAYING => playing(g)
+      case CHANGE_PLAYER => change_player()
     }
+  }
+
+  def change_player(): Unit = {
+
   }
 
   def playing(g: GdxGraphics): Unit = {
@@ -64,37 +74,9 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
       case LANDSLIDING => if (myMaps.landsliding(g, finished = false)) turnState = AIMING
     }
 
-        myMaps.refreshMaps(g)
-        myTank.drawTank(g, Color.RED)
-        autoTank.updateEnemy()
-        autoTank.drawTank(g, Color.GREEN)
-
-    // Vie des tanks
-    g.drawString(
-      50,
-      1000,
-      "Tank Rouge HP : " + myTank.health
-    )
-
-    g.drawString(
-      1400,
-      1000,
-      "Tank Vert HP : " + autoTank.health
-    )
-
-    // Game Over
-    if (autoTank.health <= 0) {
-
-      g.drawString(
-        WIN_WIDTH / 2 - 100,
-        WIN_HEIGHT / 2,
-        "VICTOIRE JOUEUR"
-      )
-    }
-
+    updateGUIGame(g)
     g.drawFPS()
   }
-
 
 
   override def onDispose(): Unit = {
