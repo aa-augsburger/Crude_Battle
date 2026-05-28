@@ -10,7 +10,6 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
   var health: Int = 820
   var isAlive: Boolean = true
   var X: Float = 0f
-  var Y: Float = 0f
 
 
   val turrentLenght = 30

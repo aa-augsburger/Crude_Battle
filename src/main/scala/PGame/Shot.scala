@@ -19,6 +19,7 @@ class Shot extends DrawableShot {
   // Vitesse initiale
   var Vo: Float = 5f
 
+  var hasAlreadyHit: Boolean = false
   var isFired: Boolean = false
 
   def initFire(
@@ -85,13 +86,13 @@ class Shot extends DrawableShot {
   def checkCollision(tank: Tank): Boolean = {
 
     val dx = X - tank.posX
-    val dy = Y - tank.Y
+    val dy = Y - tank.myMaps.surface(tank.posX)
 
-    val distance =
-      Math.sqrt(dx * dx + dy * dy).toFloat
+    val distance = Math.sqrt(dx * dx + dy * dy).toFloat
 
     println("DISTANCE = " + distance)
 
-    distance < 40
+    if(distance < tank.length) true
+    else false
   }
 }

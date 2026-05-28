@@ -7,15 +7,20 @@ trait AutoTank {
 
   this: Tank =>
 
-  speed = 2
+  val isMovable: Boolean = false
+  speed = 0
   private var direction = 1
 
   def updateEnemy(): Unit = {
 
     posX += direction * speed
 
-    if (posX < 1200) direction = 1
-    if (posX > 1700) direction = -1
+    if(isMovable) {
+      speed = 2
+      if (posX < 1200) direction = 1
+      if (posX > 1700) direction = -1
+    }
+
 
     turretAngle += 0.3f
   }

@@ -40,7 +40,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
   def initGame(): Unit = {
     stage.clear()
     myMaps = new Maps(WIN_WIDTH, WIN_HEIGHT)
-    myTank = new Tank(300, myMaps)
+    myTank = new Tank(1200, myMaps)
     autoTank = new Tank(1500, myMaps) with AutoTank {}
     myMaps.initMaps()
     guiState = PLAYING

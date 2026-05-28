@@ -8,7 +8,10 @@ trait GameLogic {
 
   def aiming(): Unit = {
     //  println("STATE AIMING")
-    if (tankInput()) turnState = FLYING
+    if (tankInput()) {
+      myTank.shot.hasAlreadyHit = false
+      turnState = FLYING
+    }
   }
 
   def flying(g: GdxGraphics): Unit = {
@@ -18,10 +21,24 @@ trait GameLogic {
       myTank.shot.drawShot(g, myTank)
     }
     // COLLISION
-    collision()
+    // Collision avec enemy tank
+    collisionWithTank()
+    collisionWithGround()
   }
 
-  def collision(): Unit = {
+  private def collisionWithTank(): Unit = {
+    if (myTank.shot.checkCollision(autoTank) && !myTank.shot.hasAlreadyHit) {
+
+      println("ENEMY TOUCHE")
+
+      // dégâts
+      autoTank.takeDamage(20)
+      // arrêter projectile
+      myTank.shot.hasAlreadyHit = true
+    }
+  }
+
+  def collisionWithGround(): Unit = {
     if (myTank.shot.Y < myMaps.surface(myTank.shot.X.toInt) && myTank.shot.isFired) {
       myTank.shot.isFired = false
       myMaps.explosion(myTank.shot.X.toInt, myMaps.surface(myTank.shot.X.toInt).toInt, 80)
