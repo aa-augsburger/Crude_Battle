@@ -69,9 +69,51 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
         autoTank.updateEnemy()
         autoTank.drawTank(g, Color.GREEN)
 
-        g.drawFPS()
+    // Vie des tanks
+    g.drawString(
+      50,
+      1000,
+      "Tank Rouge HP : " + myTank.health
+    )
 
+    g.drawString(
+      1400,
+      1000,
+      "Tank Vert HP : " + autoTank.health
+    )
+
+    // Game Over
+    if (autoTank.health <= 0) {
+
+      g.drawString(
+        WIDTH / 2 - 100,
+        HEIGHT / 2,
+        "VICTOIRE JOUEUR"
+      )
+    }
+
+    g.drawFPS()
   }
+
+  def aiming(): Unit = {
+    //  println("STATE AIMING")
+    if (tankInput()) turnState = FLYING
+  }
+
+  def flying(g: GdxGraphics): Unit = {
+    // println(("STATE FLYING"))
+    if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx) {
+      myTank.shot.updateShot()
+      myTank.shot.drawShot(g, myTank)
+    }
+    // COLLISION
+    if (myTank.shot.Y < myMaps.surface(myTank.shot.X.toInt) && myTank.shot.isFired) {
+      myTank.shot.isFired = false
+      myMaps.explosion(myTank.shot.X.toInt, myMaps.surface(myTank.shot.X.toInt).toInt, 80)
+      turnState = LANDSLIDING
+    }
+  }
+
 
   override def onDispose(): Unit = {
     super.onDispose()
