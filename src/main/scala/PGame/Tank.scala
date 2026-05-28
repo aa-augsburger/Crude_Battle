@@ -90,12 +90,12 @@ class Tank(initPos: Int = 300, val tankColor: Color, val myMaps: Maps) extends D
   }
 
   def pwrUp(): Unit = {
-    if(shot.Vo < 15) shot.Vo += 0.02f
+    if(shot.Vo < 15) shot.Vo += 0.05f
     println(s"pwr ${shot.Vo}")
   }
 
   def pwrDown(): Unit = {
-    if(shot.Vo > 0.3f) shot.Vo -= 0.02f
+    if(shot.Vo > 0.3f) shot.Vo -= 0.05f
     println(s"pwr ${shot.Vo}")
   }
 
