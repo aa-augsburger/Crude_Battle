@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton, TextField}
 
-class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIDTH, HEIGHT) with GameInput with GameGUI {
+class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: Int = 1, val nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIN_WIDTH, WIN_HEIGHT) with GameInput with GameGUI with GameLogic {
 
   var tour: Int = 0
 
@@ -39,7 +39,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int 
 
   def initGame(): Unit = {
     stage.clear()
-    myMaps = new Maps(WIDTH, HEIGHT)
+    myMaps = new Maps(WIN_WIDTH, WIN_HEIGHT)
     myTank = new Tank(300, myMaps)
     autoTank = new Tank(1500, myMaps) with AutoTank {}
     myMaps.initMaps()
@@ -72,26 +72,6 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int 
         g.drawFPS()
 
   }
-
-  def aiming(): Unit = {
-    //  println("STATE AIMING")
-    if (tankInput()) turnState = FLYING
-  }
-
-  def flying(g: GdxGraphics): Unit = {
-    // println(("STATE FLYING"))
-    if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx) {
-      myTank.shot.updateShot()
-      myTank.shot.drawShot(g, myTank)
-    }
-    // COLLISION
-    if (myTank.shot.Y < myMaps.surface(myTank.shot.X.toInt) && myTank.shot.isFired) {
-      myTank.shot.isFired = false
-      myMaps.explosion(myTank.shot.X.toInt, myMaps.surface(myTank.shot.X.toInt).toInt, 80)
-      turnState = LANDSLIDING
-    }
-  }
-
 
   override def onDispose(): Unit = {
     super.onDispose()
