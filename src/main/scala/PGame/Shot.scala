@@ -18,23 +18,24 @@ class Shot extends DrawableShot {
   var Vo: Float = 5f
   var isFired: Boolean = false
 
-  def initFire(tankX: Float, tankY: Float, tankAngle: Float, turretAngle: Float, tankLenght: Float, turrentLenght: Float): Unit = {
+  def initFire(tankX: Float, tankY: Float, tankAngleDeg: Float, turretAngleDeg: Float, tankLenght: Float, turrentLenght: Float): Unit = {
     print("init Fire")
+    val turretAngleRad = turretAngleDeg.toRadians
+    val tankAngleRad = tankAngleDeg.toRadians
     val half = tankLenght / 2
 
     // https://www.omnicalculator.com/fr/physique/calculateur-trajectoire-parabolique
-    val radAngle = (turretAngle ).toRadians
-    val cx = (-half*Math.cos(1.57-tankAngle)).toFloat
-    val cy = (half*Math.sin(1.57-tankAngle)).toFloat
-    var dx = turrentLenght*Math.cos(turretAngle.toRadians).toFloat
-    var dy = turrentLenght*Math.sin(turretAngle.toRadians).toFloat
+    val cx = (-half*Math.cos(1.57-tankAngleRad)).toFloat
+    val cy = (half*Math.sin(1.57-tankAngleRad)).toFloat
+    var dx = turrentLenght*Math.cos(turretAngleRad).toFloat
+    var dy = turrentLenght*Math.sin(turretAngleRad).toFloat
 
     // Calcul des paramètres du tir
 
     X = tankX + cx + dx
     Y = tankY + cy + dy
-    Vx = (Vo * Math.cos(radAngle)).toFloat
-    Vy = (Vo * Math.sin(radAngle)).toFloat
+    Vx = (Vo * Math.cos(turretAngleRad)).toFloat
+    Vy = (Vo * Math.sin(turretAngleRad)).toFloat
     println(Vx)
     isFired = true
   }

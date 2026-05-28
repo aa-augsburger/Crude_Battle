@@ -19,11 +19,21 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
 
   def adaptSpeedAngle(isRight: Boolean): Int = {
     val angle = if(isRight) getTankAngle(posX+length/4) else getTankAngle(posX-length/4)
-    println(angle)
+    println("next angle " + angle)
     var newSpeed = speed
     // On bloque le tank si trop de pente
-    if(isRight && angle >= 1) newSpeed = 0
-    if(!isRight && angle <= -1) newSpeed = 0
+    if(isRight) { // si le tank va a droite
+      //si il monte et la pente est trop raide, il est stoppé
+      if(angle > 50) newSpeed = 0
+
+      //si il monte, il ralenti en fonction de la pente
+
+      //si il desceend il accélère
+
+    }
+    else {
+
+    }
 
 //
 //    //on acceler le tank si ca descend
@@ -57,32 +67,34 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
   }
 
   def fire(tankY: Float): Unit = {
-    print("init Fire")
+    println("init Fire")
     shot.initFire(posX, tankY, tankAngle, turretAngle, height, turrentLenght)
   }
 
   def turretUp(): Unit = {
-    if(turretAngle < tankAngle.toDegrees+180) turretAngle += 1
-    else turretAngle = tankAngle.toDegrees+180
+    tankAngle = getTankAngle(posX)
+    if(turretAngle < tankAngle+180) turretAngle += 1
+    else turretAngle = tankAngle+180
     println(turretAngle)
   }
 
   def turretDown(): Unit = {
-    if(turretAngle > tankAngle.toDegrees) turretAngle -= 1
-    else turretAngle = tankAngle.toDegrees
+    tankAngle = getTankAngle(posX)
+    if(turretAngle > tankAngle) turretAngle -= 1
+    else turretAngle = tankAngle
     println(turretAngle)
   }
 
   def updateTurretAngle(): Unit = {
     val angle = getTankAngle(posX)
-    if(turretAngle < angle.toDegrees) turretAngle =angle.toDegrees
-    if(turretAngle > (angle.toDegrees + 180)) turretAngle = angle.toDegrees + 180
+    if(turretAngle < angle) turretAngle = angle
+    if(turretAngle > (angle + 180)) turretAngle = angle + 180
   }
 
   def getTankAngle(x: Int = posX): Float = {
     val deltaY = myMaps.surface(x + length/2) - myMaps.surface(x - length/2)
     val result = Math.atan2(deltaY, length).toFloat
-    result
+    result.toDegrees
   }
 
 }
