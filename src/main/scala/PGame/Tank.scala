@@ -70,13 +70,13 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
   }
 
   def moveLeft(): Unit = {
-    if(posX > speed + length/2) {
+    if(posX > speed + length/2+5) {
       posX -= adaptSpeedAngle(false)
     }
   }
 
   def moveRight(): Unit = {
-    if(posX < 1920-speed - length/2) {
+    if(posX < 1920-speed - length/2-5) {
       posX += adaptSpeedAngle(true)
     }
 
@@ -123,7 +123,7 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
       val result = Math.atan2(deltaY, length).toFloat
       return result.toDegrees
     }
-    0
+0
   }
 
 }
