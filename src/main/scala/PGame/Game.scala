@@ -16,7 +16,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int 
   var myTank: Tank = _
   var autoTank: Tank with AutoTank = _
 
-  var guiState: GUIState = INIT_GAME
+  var guiState: GUIState = if(debug) INIT_GAME else IN_MENU
   var turnState: TurnState = AIMING
 
   var stage: Stage = _
@@ -32,7 +32,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int 
 
   override def onInit(): Unit = {
     initGUI()
-    if(debug) {
+    if (debug) {
       guiState = INIT_GAME
     }
   }
@@ -41,7 +41,7 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int 
     stage.clear()
     myMaps = new Maps(WIDTH, HEIGHT)
     myTank = new Tank(300, myMaps)
-    autoTank = new Tank(1500,myMaps) with AutoTank {}
+    autoTank = new Tank(1500, myMaps) with AutoTank {}
     myMaps.initMaps()
     guiState = PLAYING
   }
@@ -61,24 +61,25 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int 
     turnState match {
       case AIMING => aiming()
       case FLYING => flying(g)
-      case LANDSLIDING => landsliding(g, false)
+      case LANDSLIDING => if (myMaps.landsliding(g, finished = false)) turnState = AIMING
     }
 
-    myMaps.refreshMaps(g)
-    myTank.drawTank(g, Color.RED)
-    autoTank.updateEnemy()
-    autoTank.drawTank(g, Color.GREEN)
+        myMaps.refreshMaps(g)
+        myTank.drawTank(g, Color.RED)
+        autoTank.updateEnemy()
+        autoTank.drawTank(g, Color.GREEN)
 
-    g.drawFPS()
+        g.drawFPS()
+
   }
 
   def aiming(): Unit = {
-  //  println("STATE AIMING")
-    if(tankInput()) turnState = FLYING
+    //  println("STATE AIMING")
+    if (tankInput()) turnState = FLYING
   }
 
   def flying(g: GdxGraphics): Unit = {
-   // println(("STATE FLYING"))
+    // println(("STATE FLYING"))
     if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx) {
       myTank.shot.updateShot()
       myTank.shot.drawShot(g, myTank)
@@ -86,39 +87,11 @@ class Game(WIDTH: Int = 1920, HEIGHT: Int = 1080, nbPlayer: Int = 1, nbBot: Int 
     // COLLISION
     if (myTank.shot.Y < myMaps.surface(myTank.shot.X.toInt) && myTank.shot.isFired) {
       myTank.shot.isFired = false
-      myMaps.explosion(myTank.shot.X.toInt, myMaps.surface(myTank.shot.X.toInt).toInt, 40)
+      myMaps.explosion(myTank.shot.X.toInt, myMaps.surface(myTank.shot.X.toInt).toInt, 80)
       turnState = LANDSLIDING
     }
   }
 
-  def landsliding(g: GdxGraphics, finished: Boolean): Unit = {
-    // println(("STATE LANDSLING")
-    val speed = 1
-    var sameLevel: Boolean = true
-    for (x <- myMaps.surface.indices ) {
-      if (myMaps.ceiling(x) < myMaps.surface(x)) {
-        sameLevel = false
-        val qtn = myMaps.surface(x) - myMaps.ceiling(x)
-        val newLevel = myMaps.dirt(x) + qtn
-
-        if (myMaps.surface(x) > newLevel) {
-          myMaps.surface(x) -= speed
-          myMaps.ceiling(x) -= speed
-          myMaps.dirt(x) += speed
-        }
-        else {
-          myMaps.dirt(x) = newLevel
-          myMaps.surface(x) = newLevel
-          myMaps.ceiling(x) = newLevel
-        }
-
-        println(s"il y a du plafond a effronder  $qtn")
-      }
-
-    }
-    if(sameLevel) turnState = AIMING
-
-  }
 
   override def onDispose(): Unit = {
     super.onDispose()

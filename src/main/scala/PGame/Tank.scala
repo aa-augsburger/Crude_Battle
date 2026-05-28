@@ -12,34 +12,42 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
 
 
   var shot = new Shot()
-  var posX =  initPos
+  var posX = initPos
   var speed = 3
   var turretAngle = 0f
   var tankAngle: Float = 0
 
   def adaptSpeedAngle(isRight: Boolean): Int = {
-    val angle = if(isRight) getTankAngle(posX+length/4) else getTankAngle(posX-length/4)
+    val angle = if (isRight) getTankAngle(posX + length / 4) else getTankAngle(posX - length / 4)
+    val absAngle = Math.abs(angle)
     println("next angle " + angle)
     var newSpeed = speed
-    // On bloque le tank si trop de pente
-    if(isRight) { // si le tank va a droite
-      //si il monte et la pente est trop raide, il est stoppé
-      if(angle > 50) newSpeed = 0
+    val maxAngle = 70
+    val direction = if (isRight) 1 else -1
 
-      //si il monte, il ralenti en fonction de la pente
+    //si il monte et la pente est trop raide, il est stoppé
+    if (absAngle >= maxAngle) return 0
 
-      //si il desceend il accélère
+    //on détermine si c'est une montée ou une descente
+    val estMonte = direction * Math.signum(angle  )
 
+    //si il monte, il ralenti en fonction de la pente
+    if (estMonte > 0) {
+      val breaking = (Math.tan(absAngle.toRadians) * 2.0).toInt
+      newSpeed -=  breaking
     }
-    else {
-
+    //si il desceend il accélère
+    else  {
+      val boost = (Math.tan(absAngle.toRadians) * 3.0).toInt
+      newSpeed += boost
     }
+
 
 //
 //    //on acceler le tank si ca descend
 //    if(isRight && angle < 1.2) newSpeed -
 //    if(!isRight && angle < -1.2) newSpeed = 0
-
+    println("new speed " + newSpeed)
     newSpeed
   }
 

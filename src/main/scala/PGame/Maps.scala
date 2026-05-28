@@ -1,5 +1,6 @@
 package PGame
 
+import PGame.GameState.AIMING
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
@@ -59,6 +60,35 @@ class Maps(length: Int, height: Int) {
       }
 
     }
+
+  }
+
+  def landsliding(g: GdxGraphics, finished: Boolean): Boolean = {
+    // println(("STATE LANDSLING")
+    val speed = 1
+    var sameLevel: Boolean = true
+    for (x <- surface.indices ) {
+      if (ceiling(x) < surface(x)) {
+        sameLevel = false
+        val qtn = surface(x) - ceiling(x)
+        val newLevel = dirt(x) + qtn
+
+        if (surface(x) > newLevel) {
+          surface(x) -= speed
+          ceiling(x) -= speed
+          dirt(x) += speed
+        }
+        else {
+          dirt(x) = newLevel
+          surface(x) = newLevel
+          ceiling(x) = newLevel
+        }
+
+        println(s"il y a du plafond a effronder  $qtn")
+      }
+
+    }
+    sameLevel
 
   }
 
