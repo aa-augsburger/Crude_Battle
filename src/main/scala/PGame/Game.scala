@@ -86,8 +86,8 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     if (autoTank.health <= 0) {
 
       g.drawString(
-        WIDTH / 2 - 100,
-        HEIGHT / 2,
+        WIN_WIDTH / 2 - 100,
+        WIN_HEIGHT / 2,
         "VICTOIRE JOUEUR"
       )
     }
@@ -102,7 +102,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
 
   def flying(g: GdxGraphics): Unit = {
     // println(("STATE FLYING"))
-    if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIDTH - myTank.shot.Vx) {
+    if (myTank.shot.isFired && myTank.shot.X > -myTank.shot.Vx && myTank.shot.X < WIN_WIDTH - myTank.shot.Vx) {
       myTank.shot.updateShot()
       myTank.shot.drawShot(g, myTank)
     }
