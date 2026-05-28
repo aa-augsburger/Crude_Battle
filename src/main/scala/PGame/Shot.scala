@@ -1,55 +1,97 @@
 package PGame
 
 class Shot extends DrawableShot {
-  //Position du tir
+
+  // Position du tir
   var X: Float = 0f
   var Y: Float = 0f
 
-//Vitesse du tir
+  // Vitesse du tir
   var Vx: Float = 0f
   var Vy: Float = 0f
 
-  //Variable physique
-  var G = -0.1f  //gravite
-  var weight: Float = -0f //poid addition
-  var wind: Float = 0f //vent add
-  var thrust: Float = 1f // mutliplicaton
-  //Vitesse initiaile
+  // Physique
+  var G = -0.1f
+  var weight: Float = 0f
+  var wind: Float = 0f
+  var thrust: Float = 1f
+
+  // Vitesse initiale
   var Vo: Float = 5f
+
   var isFired: Boolean = false
 
-  def initFire(tankX: Float, tankY: Float, tankAngleDeg: Float, turretAngleDeg: Float, tankLenght: Float, turrentLenght: Float): Unit = {
-    print("init Fire")
+  def initFire(
+                tankX: Float,
+                tankY: Float,
+                tankAngleDeg: Float,
+                turretAngleDeg: Float,
+                tankLenght: Float,
+                turrentLenght: Float
+              ): Unit = {
+
+    println("init Fire")
+
     val turretAngleRad = turretAngleDeg.toRadians
     val tankAngleRad = tankAngleDeg.toRadians
+
     val half = tankLenght / 2
 
-    // https://www.omnicalculator.com/fr/physique/calculateur-trajectoire-parabolique
-    val cx = (-half*Math.cos(1.57-tankAngleRad)).toFloat
-    val cy = (half*Math.sin(1.57-tankAngleRad)).toFloat
-    var dx = turrentLenght*Math.cos(turretAngleRad).toFloat
-    var dy = turrentLenght*Math.sin(turretAngleRad).toFloat
+    val cx =
+      (-half * Math.cos(1.57 - tankAngleRad)).toFloat
 
-    // Calcul des paramètres du tir
+    val cy =
+      (half * Math.sin(1.57 - tankAngleRad)).toFloat
 
+    val dx =
+      turrentLenght * Math.cos(turretAngleRad).toFloat
+
+    val dy =
+      turrentLenght * Math.sin(turretAngleRad).toFloat
+
+    // Position initiale
     X = tankX + cx + dx
     Y = tankY + cy + dy
+
+    // Vitesse
     Vx = (Vo * Math.cos(turretAngleRad)).toFloat
     Vy = (Vo * Math.sin(turretAngleRad)).toFloat
+
     println(Vx)
+
     isFired = true
   }
 
-
-
   def updateShot(): Unit = {
+
     X += Vx
     Y += Vy
-    Vy += G //gravité
-    Vy += weight //weight
-    Vx -= wind //wind
-    //Thrust
+
+    // Gravité
+    Vy += G
+
+    // Poids
+    Vy += weight
+
+    // Vent
+    Vx -= wind
+
+    // Thrust
     Vx *= thrust
     Vy *= thrust
+  }
+
+  // Collision avec un tank
+  def checkCollision(tank: Tank): Boolean = {
+
+    val dx = X - tank.posX
+    val dy = Y - tank.Y
+
+    val distance =
+      Math.sqrt(dx * dx + dy * dy).toFloat
+
+    println("DISTANCE = " + distance)
+
+    distance < 40
   }
 }

@@ -7,6 +7,12 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
   val length = 60
   val height = 30
 
+  var health: Int = 200
+  var isAlive: Boolean = true
+  var X: Float = 0f
+  var Y: Float = 0f
+
+
   val turrentLenght = 30
   val turrentWidth = 5
 
@@ -16,6 +22,19 @@ class Tank(initPos: Int = 300, val myMaps: Maps) extends DrawableTank {
   var speed = 3
   var turretAngle = 0f
   var tankAngle: Float = 0
+
+  def takeDamage(damage: Int): Unit = {
+    health -= damage
+
+    if (health <= 0) {
+      health = 0
+      isAlive = false
+      println("Tank détruit")
+    }
+
+    println("Vie restante : " + health)
+  }
+
 
   def adaptSpeedAngle(isRight: Boolean): Int = {
     val angle = if (isRight) getTankAngle(posX + length / 4) else getTankAngle(posX - length / 4)
