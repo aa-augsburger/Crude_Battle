@@ -17,6 +17,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
 
   var myMaps: Maps = _
   val colorArray: Array[Color] = Array(Color.GREEN,Color.MAGENTA, Color.YELLOW, Color.CYAN, Color.PINK, Color.DARK_GRAY)
+  val nameArray: Array[String] = Array("Beast", "Monster", "Princess", "Ultra2000", "Michel")
 
   val tankArray: ArrayBuffer[Tank] = ArrayBuffer[Tank]()
   var currTank : Tank = _
@@ -41,23 +42,6 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     }
   }
 
-  def initTank(): Unit = {
-    //création des joueurs
-    var pos = 200
-    for(i <- 0 until nbPlayer) {
-      println("on init les tanks player")
-
-      tankArray.addOne(new Tank(pos, colorArray(i), myMaps))
-      pos += 500
-    }
-    for(i <- 0 until nbBot) {
-      println("on init les tanks bot")
-
-      tankArray.addOne(new Tank(pos, colorArray(nbPlayer + i), myMaps) with AutoTank {})
-      pos += 200
-    }
-  }
-
 
   def initGame(): Unit = {
     stage.clear()
@@ -77,12 +61,6 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     }
   }
 
-  def change_player(): Unit = {
-    idxActivePlayer += 1
-    idxActivePlayer %= nbPlayer
-    currTank = tankArray(idxActivePlayer)
-    turnState = AIMING
-  }
 
   def playing(g: GdxGraphics): Unit = {
     g.clear(Color.LIGHT_GRAY)
@@ -96,13 +74,11 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
       case CHANGE_PLAYER => change_player()
     }
 
-    for(tank <- tankArray) {
-      tank.updateTank()
-      tank.drawTank(g)
-      updateUITank(g, tank)
-    }
+    updateGUIGame(g, currTank)
+    updateTankArray(g)
     g.drawFPS()
   }
+
 
   override def onDispose(): Unit = {
     super.onDispose()

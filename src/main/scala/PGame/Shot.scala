@@ -1,6 +1,6 @@
 package PGame
 
-class Shot extends DrawableShot {
+class Shot extends DrawableShot with Physic {
 
   // Position du tir
   var X: Float = 0f
@@ -9,12 +9,6 @@ class Shot extends DrawableShot {
   // Vitesse du tir
   var Vx: Float = 0f
   var Vy: Float = 0f
-
-  // Physique
-  var G = -0.1f
-  var weight: Float = 0f
-  var wind: Float = 0f
-  var thrust: Float = 1f
 
   // Vitesse initiale
   var Vo: Float = 5f
@@ -38,17 +32,13 @@ class Shot extends DrawableShot {
 
     val half = tankLenght / 2
 
-    val cx =
-      (-half * Math.cos(1.57 - tankAngleRad)).toFloat
+    val cx = (-half * Math.cos(1.57 - tankAngleRad)).toFloat
 
-    val cy =
-      (half * Math.sin(1.57 - tankAngleRad)).toFloat
+    val cy = (half * Math.sin(1.57 - tankAngleRad)).toFloat
 
-    val dx =
-      turrentLenght * Math.cos(turretAngleRad).toFloat
+    val dx = turrentLenght * Math.cos(turretAngleRad).toFloat
 
-    val dy =
-      turrentLenght * Math.sin(turretAngleRad).toFloat
+    val dy = turrentLenght * Math.sin(turretAngleRad).toFloat
 
     // Position initiale
     X = tankX + cx + dx
@@ -65,6 +55,7 @@ class Shot extends DrawableShot {
 
   def updateShot(): Unit = {
 
+    //Changement de position en fonction du temps
     X += Vx
     Y += Vy
 
