@@ -39,14 +39,14 @@ class Maps(length: Int, height: Int) {
       }
     }
 
-  def explosion(posX: Int, posY: Int, r: Int) = {
-    var minX = posX - r
-    var maxX = posX + r
+  def explosion(posX: Int, posY: Int, radius:Int) = {
+    var minX = posX - radius
+    var maxX = posX + radius
     if (minX < 0) minX = 0
     if (maxX > length) maxX = length
     for (x <- minX to maxX) {
       val dx = Math.abs(posX - x)
-      val y: Float = Math.sqrt(r * r - dx * dx).toInt
+      val y: Float = Math.sqrt(radius * radius - dx * dx).toInt
       val lowPoint = posY-y
       val highPoint = posY+y
       if(surface(x) > highPoint) {

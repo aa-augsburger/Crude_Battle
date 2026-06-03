@@ -17,7 +17,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
 
   var myMaps: Maps = _
   val colorArray: Array[Color] = Array(Color.GREEN,Color.MAGENTA, Color.YELLOW, Color.CYAN, Color.PINK, Color.DARK_GRAY)
-  val nameArray: Array[String] = Array("Beast", "Monster", "Princess", "Ultra2000", "Michel")
+  val nameArray: Array[String] = Array("Beast", "Monster", "Princess", "Ultra2000", "Michel", "Gustav")
 
   val tankArray: ArrayBuffer[Tank] = ArrayBuffer[Tank]()
   var currTank : Tank = _
@@ -42,6 +42,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     }
   }
 
+  /**Initialisation du programme */
 
   def initGame(): Unit = {
     stage.clear()
@@ -53,6 +54,8 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     guiState = PLAYING
   }
 
+  /** Cette fonction est appelé 60 fois par seconde */
+
   override def onGraphicRender(g: GdxGraphics): Unit = {
     guiState match {
       case IN_MENU => if (updateStage(g)) return
@@ -61,6 +64,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     }
   }
 
+  /** Fonction principal du jeu*/
 
   def playing(g: GdxGraphics): Unit = {
     g.clear(Color.LIGHT_GRAY)

@@ -1,6 +1,7 @@
 package PGame
 
 import com.badlogic.gdx.{Gdx, Input}
+/** Ce trait gère les entrés du claviers et appelle les bonnes fonctions en conséquences*/
 
 trait GameInput {
   this: Game =>
@@ -11,6 +12,9 @@ trait GameInput {
     if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) myTank.turretDown()
     if (Gdx.input.isKeyPressed(Input.Keys.Q)) myTank.pwrDown()
     if (Gdx.input.isKeyPressed(Input.Keys.W)) myTank.pwrUp()
+    if (Gdx.input.isKeyJustPressed(Input.Keys.A)) myTank.prevWeapon()
+    if (Gdx.input.isKeyJustPressed(Input.Keys.S)) myTank.nextWeapon()
+
     if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
       myTank.fire(myMaps.dirt(myTank.posX))
       return true

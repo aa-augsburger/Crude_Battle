@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton, TextField}
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
+/** Ce trait permet de gérer l'affichage du jeu*/
+
+
 trait GameGUI {
   this: Game =>
 
@@ -89,6 +92,8 @@ trait GameGUI {
     false
   }
 
+  /** Mettre a jour le HUD */
+
   def updateGUIGame(g: GdxGraphics, currTank: Tank): Unit = {
     val x = 20
     val space = 150
@@ -97,9 +102,12 @@ trait GameGUI {
     g.setColor(Color.BLACK)
     g.drawString(x, y, currTank.tankName, optimus40)
     g.drawString(x + space, y,  f"Health : ${currTank.health}", optimus40)
-    g.drawString(x + 3 * space, y, f"Power :   ${currTank.shot.Vo}%.2f", optimus40)
+    g.drawString(x + 3 * space, y, f"Power :   ${currTank.currWeapon.power}%.2f", optimus40)
     g.drawString(x + 5 * space, y, f"Angle :   ${currTank.turretAngle}%.2f", optimus40)
+    g.drawString(x + 7 * space, y, f"Weapon :   ${currTank.currWeapon.name}", optimus40)
   }
+  /** Mets a jour le texte sur les tank*/
+
 
   def updateUITank(g: GdxGraphics, tank: Tank) = {
     g.setColor(Color.BLACK)

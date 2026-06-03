@@ -3,8 +3,14 @@ package PGame
 import PGame.GameState.{AIMING, CHANGE_PLAYER, FLYING, LANDSLIDING}
 import ch.hevs.gdx2d.lib.GdxGraphics
 
+/** Cette classe gère la logique du jeu*/
+
+
 trait GameLogic {
   this: Game =>
+
+  /** Initialisation des tanks*/
+
 
   def initTank(): Unit = {
     //création des joueurs
@@ -23,12 +29,17 @@ trait GameLogic {
     }
   }
 
+  /** Quand on change de joueur */
+
   def change_player(): Unit = {
     idxActivePlayer += 1
     idxActivePlayer %= nbPlayer
     currTank = tankArray(idxActivePlayer)
     turnState = AIMING
   }
+
+  /** Mise à jour de tous les tanks */
+
 
   def updateTankArray(g: GdxGraphics): Unit = {
     for (tank <- tankArray) {
@@ -38,6 +49,9 @@ trait GameLogic {
     }
   }
 
+  /** */
+
+
   def aiming(): Unit = {
     //  println("STATE AIMING")
     if (tankInput(currTank)) {
@@ -46,9 +60,14 @@ trait GameLogic {
     }
   }
 
+
+  /** Méthode appelé quand un tir est effectué */
+
   def flying(g: GdxGraphics): Unit = {
     // println(("STATE FLYING"))
     currTank.shot.updateShot()
+
+    //Gestion des limites de la maps
     if (currTank.shot.isFired && currTank.shot.X > -currTank.shot.Vx && currTank.shot.X < WIN_WIDTH - currTank.shot.Vx) {
       currTank.shot.drawShot(g, currTank)
     }
@@ -57,13 +76,15 @@ trait GameLogic {
       return
     }
     // COLLISION
-    // Collision avec enemy tank
-    collisionWithTank()
+    // Collision avec les tanks ennemis et le sols
     collisionWithGround()
+    collisionWithTank()
 
+    if(currTank.shot.Y > 3000 | currTank.shot.Y < 0) turnState = CHANGE_PLAYER
 
   }
 
+  /** Gestion de la collison avec un tank ennemi*/
 
 
   def collisionWithTank(): Unit = {
@@ -74,18 +95,24 @@ trait GameLogic {
           println("ENEMY TOUCHE")
 
           // dégâts
-          tank.takeDamage(20)
+          tank.takeDamage(currTank.shot.damage)
           // arrêter projectile
+          currTank.shot.isFired = false
           currTank.shot.hasAlreadyHit = true
+          val collisionX = (currTank.shot.X).toInt
+          val collisionY = (currTank.shot.Y).toInt
+          myMaps.explosion(collisionX, collisionY, currTank.shot.radius)
         }
       }
   }
 
   def collisionWithGround(): Unit = {
-    if (currTank.shot.Y < myMaps.surface(currTank.shot.X.toInt) && currTank.shot.isFired) {
-      currTank.shot.isFired = false
-      myMaps.explosion(currTank.shot.X.toInt, myMaps.surface(currTank.shot.X.toInt).toInt, 80)
-      turnState = LANDSLIDING
+    if(currTank.shot.isFired) {
+      if (currTank.shot.Y < myMaps.surface(currTank.shot.X.toInt) ) {
+        currTank.shot.isFired = false
+        myMaps.explosion(currTank.shot.X.toInt, myMaps.surface(currTank.shot.X.toInt).toInt, currTank.shot.radius)
+        turnState = LANDSLIDING
+      }
     }
   }
 

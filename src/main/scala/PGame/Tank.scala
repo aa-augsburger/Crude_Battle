@@ -2,10 +2,17 @@ package PGame
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
+/** Cette classe permet de gérer la logique de jeu des tanks
+ *
+ * */
+
+
 
 class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, val myMaps: Maps) extends DrawableTank {
   val length = 60
   val height = 30
+
+  var idxWeapon = 0
 
   var health: Int = 100
   var isAlive: Boolean = true
@@ -14,8 +21,9 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
 
 
 
-  val weaponArray: Array[Weapon] = Array(new Weapon, new Laser)
-  var currWeapon = weaponArray(1)
+
+  val weaponArray: Array[Weapon] = Array(new Canon, new Laser, new MachineGun)
+  var currWeapon = weaponArray(0)
 
 
   val turrentLenght = 30
@@ -78,6 +86,21 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
     newSpeed
   }
 
+  def prevWeapon(): Unit = {
+    idxWeapon -= 1
+    if(idxWeapon < 0) idxWeapon = 0
+    idxWeapon = idxWeapon % weaponArray.length
+    currWeapon = weaponArray(idxWeapon)
+  }
+
+  def nextWeapon(): Unit = {
+    idxWeapon += 1
+    idxWeapon = idxWeapon % weaponArray.length
+    currWeapon = weaponArray(idxWeapon)
+  }
+
+
+
   def moveLeft(): Unit = {
     if(posX > speed + length/2+5) {
       posX -= adaptSpeedAngle(false)
@@ -88,22 +111,26 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
     if(posX < 1920-speed - length/2-5) {
       posX += adaptSpeedAngle(true)
     }
-
   }
 
   def pwrUp(): Unit = {
-    if(shot.Vo < 15) shot.Vo += 0.05f
+    if(currWeapon.power < 100) currWeapon.power += 1
     println(s"pwr ${shot.Vo}")
   }
 
   def pwrDown(): Unit = {
-    if(shot.Vo > 0.3f) shot.Vo -= 0.05f
+    if(currWeapon.power > 0) currWeapon.power -= 1
     println(s"pwr ${shot.Vo}")
   }
 
   def fire(tankY: Float): Unit = {
     println("init Fire")
-    shot.initFire(posX, tankY, tankAngle, turretAngle, height, turrentLenght)
+    val ratio = (currWeapon.maxPwr-currWeapon.minPwr)/100
+    var pwr = ratio*currWeapon.power+currWeapon.minPwr
+    for(i <- 0 until currWeapon.round) {
+      shot.initFire(posX, tankY, tankAngle, turretAngle, height, turrentLenght, pwr, currWeapon.weight, currWeapon.damage, currWeapon.blastRadius)
+      pwr -= 5
+    }
   }
 
   def turretUp(): Unit = {

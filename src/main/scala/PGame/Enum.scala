@@ -1,10 +1,12 @@
 package PGame
 
+/** Etats généraux pendant une partie de jeu*/
 
 object GameState extends Enumeration {
   type TurnState = Value
   val AIMING, FLYING, LANDSLIDING,CHANGE_PLAYER = Value
 }
+/** Etats généraux du programme */
 
 object GUIState extends Enumeration {
   type GUIState = Value

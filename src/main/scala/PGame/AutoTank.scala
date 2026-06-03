@@ -3,6 +3,9 @@ package PGame
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
+/** Trait qui permet d'implémtener un tank automatique qui bouge tout seul
+ */
+
 trait AutoTank {
 
   this: Tank =>
@@ -12,6 +15,8 @@ trait AutoTank {
 
   speed = 0
   private var direction = 1
+
+  //
 
   override def updateTank(): Unit = {
     posY = myMaps.surface(posX)
