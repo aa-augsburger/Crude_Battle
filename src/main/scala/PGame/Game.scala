@@ -1,7 +1,7 @@
 package PGame
 
 import PGame.GUIState.{GUIState, INIT_GAME, IN_MENU, PLAYING}
-import PGame.GameState.{CHANGE_PLAYER, AIMING, FLYING, LANDSLIDING, TurnState}
+import PGame.GameState.{AIMING, BOT_AIMING, CHANGE_PLAYER, FLYING, INIT_BOT, LANDSLIDING, TurnState}
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
@@ -76,6 +76,8 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
       case FLYING => flying(g)
       case LANDSLIDING => if (myMaps.landsliding(g, finished = false)) turnState = CHANGE_PLAYER
       case CHANGE_PLAYER => change_player()
+      case INIT_BOT => init_bot()
+      case BOT_AIMING => bot_aiming()
     }
 
     updateGUIGame(g, currTank)

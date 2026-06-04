@@ -21,7 +21,6 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
 
 
 
-
   val weaponArray: Array[Weapon] = Array(new Canon, new Laser, new MachineGun)
   var currWeapon = weaponArray(0)
 
@@ -34,9 +33,9 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
   var posX = initPos
   var posY = myMaps.surface(posX)
   var speed = 3
-  var turretAngle = 0f
-  var tankAngle: Float = 0
-
+  var tankAngle: Float = getTankAngle(posX)
+  var turretAngle = tankAngle + 90f
+  var currRound: Int = 0
   def updateTank() = {
     posY = myMaps.surface(posX)
   }
@@ -57,7 +56,7 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
     val absAngle = Math.abs(angle)
     println("next angle " + angle)
     var newSpeed = speed
-    val maxAngle = 70
+    val maxAngle = 80
     val direction = if (isRight) 1 else -1
 
     //si il monte et la pente est trop raide, il est stoppé
@@ -125,12 +124,17 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
 
   def fire(tankY: Float): Unit = {
     println("init Fire")
-    val ratio = (currWeapon.maxPwr-currWeapon.minPwr)/100
-    var pwr = ratio*currWeapon.power+currWeapon.minPwr
-    for(i <- 0 until currWeapon.round) {
-      shot.initFire(posX, tankY, tankAngle, turretAngle, height, turrentLenght, pwr, currWeapon.weight, currWeapon.damage, currWeapon.blastRadius)
-      pwr -= 5
+    val pwr: Float = getPower
+    currRound = 0
+    updateTurretAngle()
+    shot.initFire(posX, tankY, tankAngle, turretAngle, height, turrentLenght, pwr, currWeapon.weight, currWeapon.damage, currWeapon.blastRadius)
     }
+
+
+  def getPower = {
+    val ratio = (currWeapon.maxPwr - currWeapon.minPwr) / 100
+    val pwr = ratio * currWeapon.power + currWeapon.minPwr
+    pwr
   }
 
   def turretUp(): Unit = {

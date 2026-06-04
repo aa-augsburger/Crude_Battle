@@ -15,6 +15,7 @@ abstract class Weapon {
   var minPwr = 0f
   var maxPwr = 15f
   var power = 10f
+  var multipleRound: Boolean = false
 
 }
 
@@ -36,10 +37,10 @@ class Canon extends Weapon {
   name = "Canon"
   damage = 50
   speed = 10f
-  weight = 1.5f
+  weight = 2f
   blastRadius = 100
   round = 1
-  minPwr = 0f
+  minPwr = 2f
   maxPwr = 15f
   trace = true
 }
@@ -48,8 +49,12 @@ class MachineGun extends Weapon {
   name = "MachineGun"
   damage = 10
   speed = 10f
-  weight = 1f
+  weight = 1.5f
   blastRadius = 20
-  round = 6
+  round = 3
+  minPwr = 15f
+  maxPwr = 30f
+  trace = true
+  multipleRound = true
 }
 

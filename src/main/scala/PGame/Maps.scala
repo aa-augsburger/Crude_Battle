@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color
 
 class Maps(length: Int, height: Int) {
 
-
+  val WIN_WIDTH = length
   val dirt: Array[Float] = new Array[Float](length)
   val surface: Array[Float] = new Array[Float](length)
   val ceiling: Array[Float] = new Array[Float](length)
@@ -84,13 +84,12 @@ class Maps(length: Int, height: Int) {
           ceiling(x) = newLevel
         }
 
-        println(s"il y a du plafond a effronder  $qtn")
+     //  println(s"il y a du plafond a effronder  $qtn")
       }
 
     }
     sameLevel
 
   }
-
 
 }

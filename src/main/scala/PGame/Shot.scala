@@ -65,7 +65,6 @@ class Shot extends DrawableShot with Physic {
     Vy = (Vo * Math.sin(turretAngleRad)).toFloat
 
 
-
     println(Vx)
 
     isFired = true
@@ -77,14 +76,10 @@ class Shot extends DrawableShot with Physic {
     X += Vx
     Y += Vy
 
-    // Gravité
+    // Gravité, si c'est un laser de poid 0, il n'est pas influenceé par la gravité
     if(weight != 0) Vy += (G * weight)
 
-
-
-
-    // Vent
-
+    // Vent, idem pour le laser il n'est pas influencé par le vent
     if(weight != 0) Vx -= (wind / weight)
 
     // Thrust
@@ -100,7 +95,7 @@ class Shot extends DrawableShot with Physic {
 
     val distance = Math.sqrt(dx * dx + dy * dy).toFloat
 
-    println("DISTANCE = " + distance)
+    //println("DISTANCE = " + distance)
 
     if(distance < tank.length) true
     else false

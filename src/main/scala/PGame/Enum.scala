@@ -4,7 +4,7 @@ package PGame
 
 object GameState extends Enumeration {
   type TurnState = Value
-  val AIMING, FLYING, LANDSLIDING,CHANGE_PLAYER = Value
+  val AIMING, FLYING, LANDSLIDING,CHANGE_PLAYER, INIT_BOT, BOT_AIMING = Value
 }
 /** Etats généraux du programme */
 
