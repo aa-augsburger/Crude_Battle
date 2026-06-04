@@ -107,7 +107,7 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
   }
 
   def moveRight(): Unit = {
-    if(posX < 1920-speed - length/2-5) {
+    if(posX < myMaps.WIN_WIDTH-speed - length/2-5) {
       posX += adaptSpeedAngle(true)
     }
   }
@@ -158,7 +158,7 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
   }
 
   def getTankAngle(x: Int = posX): Float = {
-    if(x-length/2> 0 && x+length/2+speed < 1920) {
+    if(x-length/2> 0 && x+length/2+speed < myMaps.WIN_WIDTH) {
       val deltaY = myMaps.surface(x + length/2) - myMaps.surface(x - length/2)
       val result = Math.atan2(deltaY, length).toFloat
       return result.toDegrees

@@ -5,7 +5,7 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
 
-class Maps(length: Int, height: Int) {
+class Maps(length: Int, height: Int, k:Int) {
 
   val WIN_WIDTH = length
   val WIN_HEIGHT = height
@@ -21,7 +21,7 @@ class Maps(length: Int, height: Int) {
       val a = (x+d) * (0.001f)*r
       val s = Math.sin(a) + Math.sin(Math.E * a) + Math.sin(Math.PI * a)
      // println(s)
-      val h = 400f+ s.toFloat*100f
+      val h = 400f*k+ s.toFloat*100f
       dirt(x) = h
       surface(x) = h
       ceiling(x) = h

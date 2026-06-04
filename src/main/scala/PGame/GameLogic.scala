@@ -68,7 +68,7 @@ trait GameLogic {
           bot.turretAngle = (Math.signum(distX)*Math.atan2(distY, distX).toDegrees).toFloat
           bot.updateTurretAngle()
           val ratio = (bot.currWeapon.maxPwr - bot.currWeapon.minPwr) / 100
-          bot.currWeapon.power = ratio * (dist.toFloat*500/1920) + bot.currWeapon.minPwr
+          bot.currWeapon.power = ratio * (dist.toFloat*500/myMaps.WIN_WIDTH) + bot.currWeapon.minPwr
           bot.fire(myMaps.surface(bot.posX))
           bot.shot.hasAlreadyHit = false
           turnState = FLYING

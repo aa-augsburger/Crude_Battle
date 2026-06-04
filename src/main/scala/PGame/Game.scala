@@ -11,7 +11,7 @@ import com.sun.tools.javac.code.TypeTag
 
 import scala.collection.mutable.ArrayBuffer
 
-class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: Int = 3, val nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIN_WIDTH, WIN_HEIGHT) with GameInput with GameGUI with GameLogic {
+class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080,k: Int, val nbPlayer: Int = 3, val nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIN_WIDTH, WIN_HEIGHT) with GameInput with GameGUI with GameLogic {
 
   var idxActivePlayer: Int = 0
 
@@ -46,7 +46,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
 
   def initGame(g: GdxGraphics): Unit = {
     stage.clear()
-    myMaps = new Maps(WIN_WIDTH, WIN_HEIGHT)
+    myMaps = new Maps(WIN_WIDTH, WIN_HEIGHT, k)
 
     myMaps.initMaps()
     initTank()

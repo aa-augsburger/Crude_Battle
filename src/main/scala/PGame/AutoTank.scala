@@ -41,7 +41,7 @@ trait AutoTank {
       else { //on va a droite
         speed = 2
         val slopeSpeed = adaptSpeedAngle(isRight = true)
-        if(posX < 1920-speed - length/2-5) {
+        if(posX < myMaps.WIN_WIDTH*2-speed - length/2-5) {
           posX += speed
         }
         else
