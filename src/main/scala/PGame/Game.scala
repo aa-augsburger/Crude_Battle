@@ -51,6 +51,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
     myMaps.initMaps()
     initTank()
     currTank = tankArray(0)
+    if(nbPlayer == 0) turnState = INIT_BOT
     guiState = PLAYING
   }
 

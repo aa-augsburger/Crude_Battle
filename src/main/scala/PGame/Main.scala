@@ -6,6 +6,6 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 
 object Main {
   def main(args: Array[String]): Unit = {
-    new Game(WIN_WIDTH = 1920, WIN_HEIGHT = 1080, 1,1, true )
+    new Game(WIN_WIDTH = 1920, WIN_HEIGHT = 1080, 0,2, true )
   }
 }
