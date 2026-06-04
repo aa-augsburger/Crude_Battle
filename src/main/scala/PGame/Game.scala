@@ -44,7 +44,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
 
   /**Initialisation du programme */
 
-  def initGame(): Unit = {
+  def initGame(g: GdxGraphics): Unit = {
     stage.clear()
     myMaps = new Maps(WIN_WIDTH, WIN_HEIGHT)
 
@@ -59,7 +59,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080, val nbPlayer: 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     guiState match {
       case IN_MENU => if (updateStage(g)) return
-      case INIT_GAME => initGame()
+      case INIT_GAME => initGame(g)
       case PLAYING => playing(g)
     }
   }

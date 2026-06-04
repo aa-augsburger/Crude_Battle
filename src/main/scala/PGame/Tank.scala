@@ -54,7 +54,7 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
   def adaptSpeedAngle(isRight: Boolean): Int = {
     val angle = if (isRight) getTankAngle(posX + length / 4) else getTankAngle(posX - length / 4)
     val absAngle = Math.abs(angle)
-    println("next angle " + angle)
+   // println("next angle " + angle)
     var newSpeed = speed
     val maxAngle = 80
     val direction = if (isRight) 1 else -1
@@ -81,7 +81,7 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
 //    //on acceler le tank si ca descend
 //    if(isRight && angle < 1.2) newSpeed -
 //    if(!isRight && angle < -1.2) newSpeed = 0
-    println("new speed " + newSpeed)
+    // println("new speed " + newSpeed)
     newSpeed
   }
 
@@ -126,7 +126,6 @@ class Tank(initPos: Int = 300, val tankName: String = "", val tankColor: Color, 
     println("init Fire")
     val pwr: Float = getPower
     currRound = 0
-    updateTurretAngle()
     shot.initFire(posX, tankY, tankAngle, turretAngle, height, turrentLenght, pwr, currWeapon.weight, currWeapon.damage, currWeapon.blastRadius)
     }
 

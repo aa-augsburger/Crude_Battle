@@ -47,9 +47,10 @@ trait GameLogic {
   def init_bot(): Unit = {
     currTank match {
       case bot: AutoTank => {
-        println("INIT BOT PLAYER")
+        //println("INIT BOT PLAYER")
+        val offensivePer = bot.health
         bot.nextEnnemy = bot.chooseEnnemy(tankArray)
-        bot.nextPosX = bot.findTop()
+        bot.nextPosX = bot.bestPos(offensivePer)
         }
       }
     turnState = BOT_AIMING
@@ -58,16 +59,17 @@ trait GameLogic {
   def bot_aiming(): Unit = {
     currTank match {
       case bot: AutoTank => {
-        println("BOT PLAYER")
+      //  println("BOT PLAYER")
         if (bot.moveTo(bot.nextPosX)) {
           val distX = bot.nextEnnemy.posX-bot.posX
           val distY = bot.nextEnnemy.posY-bot.posY
           val dist = Math.sqrt(distX*distX + distY * distY)
           println("dist  " + dist)
           bot.turretAngle = (Math.signum(distX)*Math.atan2(distY, distX).toDegrees).toFloat
+          bot.updateTurretAngle()
           val ratio = (bot.currWeapon.maxPwr - bot.currWeapon.minPwr) / 100
           bot.currWeapon.power = ratio * (dist.toFloat*500/1920) + bot.currWeapon.minPwr
-          bot.fire(myMaps.surface(currTank.posX))
+          bot.fire(myMaps.surface(bot.posX))
           bot.shot.hasAlreadyHit = false
           turnState = FLYING
         }

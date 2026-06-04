@@ -16,7 +16,7 @@ trait GameInput {
     if (Gdx.input.isKeyJustPressed(Input.Keys.S)) myTank.nextWeapon()
 
     if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-      myTank.fire(myMaps.dirt(myTank.posX))
+      myTank.fire(myMaps.surface(myTank.posX))
       return true
     }
     false

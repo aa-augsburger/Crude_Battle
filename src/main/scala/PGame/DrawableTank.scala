@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Color
 
 trait DrawableTank {
   this: Tank =>
-  def drawTank(g: GdxGraphics) = {
+  def drawTank(g: GdxGraphics): Unit = {
     val tankAngleRad = getTankAngle().toRadians
     val turretAngleRad = turretAngle.toRadians
     val halfHeight = height/2
