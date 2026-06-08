@@ -90,6 +90,7 @@ trait AutoTank {
       if(tank != this) { //on evite de se choisir, on n'est pas suicidaire
         distEnemy = this.posX - tank.posX //calcule de la distanec
         choosenTank = tank
+        println(s" ${this.tankName} ----->>>>>> ${choosenTank.tankName}")
         return choosenTank
       }
     }
