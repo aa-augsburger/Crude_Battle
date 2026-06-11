@@ -62,9 +62,7 @@ trait GameGUI {
     stage.addActor(newGameButton)
     stage.addActor(quitButton)
   }
-
   // cette méthode permet d'initialiser les boutons
-
   private def initButton = {
     newGameButton =
       new TextButton("Nouvelle Partie", skin)
