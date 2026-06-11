@@ -43,7 +43,7 @@ Le joueur contrôle un tank sur un terrain généré aléatoirement et destructi
 ## Lancement du projet
 
 ```bash
-git clone <repository>
+git clone https://github.com/aa-augsburger/Crude_Battle.git
 cd crude-battle
 ```
 Cloner le projet puis l'ouvrir le projet dans IntelliJ IDEA puis exécuter la classe principale "Main".
