@@ -31,6 +31,9 @@ Le joueur contrôle un tank sur un terrain généré aléatoirement et destructi
 | S | Arme suivante |
 | Espace | Tirer |
 
+<img width="1924" height="1134" alt="image" src="https://github.com/user-attachments/assets/681b59e4-a2fe-47a4-ab5c-aa2fb876e294" />
+
+
 ## Technologies utilisées
 
 - Scala
