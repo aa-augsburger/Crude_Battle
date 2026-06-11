@@ -11,9 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton, TextField}
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
-/** Ce trait permet de gérer l'affichage du jeu*/
-
-
+/** Gère toute l'interface utilisateur (menu + HUD en jeu) */
 trait GameGUI {
   this: Game with Physic =>
 
