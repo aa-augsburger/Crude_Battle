@@ -25,7 +25,7 @@ trait GameInput {
   def gameInput(): Unit = {
     if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
       gameStarted = false
-      stage.addActor(textArea)
+      stage.addActor(playerName)
       stage.addActor(newGameButton)
       stage.addActor(quitButton)
     }

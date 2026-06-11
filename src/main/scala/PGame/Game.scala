@@ -11,13 +11,13 @@ import com.sun.tools.javac.code.TypeTag
 
 import scala.collection.mutable.ArrayBuffer
 
-class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080,k: Int, val nbPlayer: Int = 3, val nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIN_WIDTH, WIN_HEIGHT) with GameInput with GameGUI with GameLogic {
+class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080,k: Int, var nbPlayer: Int = 3, var nbBot: Int = 1, val debug: Boolean = true) extends PortableApplication(WIN_WIDTH, WIN_HEIGHT) with GameInput with GameGUI with GameLogic with Physic {
 
   var idxActivePlayer: Int = 0
 
   var myMaps: Maps = _
   val colorArray: Array[Color] = Array(Color.GREEN,Color.MAGENTA, Color.YELLOW, Color.CYAN, Color.PINK, Color.DARK_GRAY)
-  val nameArray: Array[String] = Array("Beast", "Monster", "Princess", "Ultra2000", "Michel", "Gustav")
+  val nameArray: Array[String] = Array("Beast", "Muitank", "Princess", "Ultra2000", "Michel", "Gustav")
 
   val tankArray: ArrayBuffer[Tank] = ArrayBuffer[Tank]()
   var currTank : Tank = _
@@ -29,7 +29,10 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080,k: Int, val nbP
 
   var newGameButton: TextButton = _
   var quitButton: TextButton = _
-  var textArea: TextField = _
+  var playerName: TextField = _
+  var nbPlayerField: TextField = _
+  var nbBotField: TextField = _
+  var windField: TextField = _
 
   // false = menu
   // true = jeu
@@ -38,7 +41,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080,k: Int, val nbP
   override def onInit(): Unit = {
     initGUI()
     if (debug) {
-      guiState = INIT_GAME
+      guiState = IN_MENU
     }
   }
 

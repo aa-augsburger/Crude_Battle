@@ -15,11 +15,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
 
 trait GameGUI {
-  this: Game =>
+  this: Game with Physic =>
 
+  val fieldWidth = 250
+  val fieldHeight = 40
+  var posX = WIN_WIDTH/2
+  var posY = WIN_HEIGHT-20
   private var optimus40: BitmapFont = _
 
   def initGUI(): Unit = {
+
+    val centerX = WIN_WIDTH / 2f - (fieldWidth / 2)
 
     setTitle("Crude Battle")
     initFont()
@@ -27,27 +33,53 @@ trait GameGUI {
     Gdx.input.setInputProcessor(stage)
     skin =
       new Skin(Gdx.files.internal("examples/ui/uiskin.json"))
-    textArea = new TextField("", skin)
-    textArea.setSize(250, 40)
-    textArea.setPosition(getWindowWidth / 2f - 125, getWindowHeight * 0.75f)
+    playerName = new TextField("", skin)
+    playerName.setSize(250, 40)
+    playerName.setPosition(getWindowWidth / 2f - 125, getWindowHeight * 0.8f)
+    playerName.setMessageText("Nom du joueur")
 
-    textArea.setMessageText("Nom du joueur")
+    //configuration des fields
+    nbPlayerField = new TextField("", skin)
+    nbPlayerField.setSize(fieldWidth, fieldHeight)
+    nbPlayerField.setPosition(centerX, getWindowHeight * 0.75f)
+    nbPlayerField.setMessageText("Nombre de joueurs (ex: 2)")
+    nbBotField = new TextField("", skin)
+    nbBotField.setSize(fieldWidth, fieldHeight)
+    nbBotField.setPosition(centerX, getWindowHeight * 0.7f)
+    nbBotField.setMessageText("Nombre de bots (ex: 1)")
+    windField = new TextField("", skin)
+    windField.setSize(fieldWidth, fieldHeight)
+    windField.setPosition(centerX, getWindowHeight * 0.65f)
+    windField.setMessageText("Force du vent")
     initButton
 
-    stage.addActor(textArea)
+    stage.addActor(playerName)
+    stage.addActor(nbPlayerField)
+    stage.addActor(nbBotField)
+    stage.addActor(windField)
+    stage.addActor(newGameButton)
+    stage.addActor(quitButton)
     stage.addActor(newGameButton)
     stage.addActor(quitButton)
   }
+
+  // cette méthode permet d'initialiser les boutons
 
   private def initButton = {
     newGameButton =
       new TextButton("Nouvelle Partie", skin)
     newGameButton.setSize(220, 45)
-    newGameButton.setPosition(getWindowWidth / 2f - 110, getWindowHeight * 0.55f)
+    newGameButton.setPosition(getWindowWidth / 2f - 110, getWindowHeight * 0.35f)
 
     newGameButton.addListener(
       new ClickListener {
         override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
+          val botInput = nbBotField.getText.trim
+          val playerInput = nbPlayerField.getText.trim
+          val windInput   = windField.getText.trim
+          nbBot = if (botInput.matches("\\d+")) botInput.toInt else 1
+          nbPlayer = if (playerInput.matches("\\d+")) playerInput.toInt else 2
+          wind   = if (windInput.matches("-?\\d+")) windInput.toInt else 0
           guiState = GUIState.INIT_GAME
         }
       }
@@ -55,10 +87,12 @@ trait GameGUI {
 
     quitButton = new TextButton("Quitter", skin)
 
-    quitButton.setSize(220, 45)
+    quitButton.setSize(fieldWidth, fieldHeight)
     quitButton.setPosition(getWindowWidth / 2f - 110, getWindowHeight * 0.42f)
 
     quitButton.addListener(
+
+      // quand on clique pour quitter
       new ClickListener {
         override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
           Gdx.app.exit()
@@ -67,6 +101,8 @@ trait GameGUI {
     )
   }
 
+
+  //cette methode permet d'initialiser les polices de caractères
   def initFont() = {
 
     val optimusF = Gdx.files.internal("examples/font/Timeless.ttf")
@@ -78,13 +114,15 @@ trait GameGUI {
 
   }
 
+
+  //cette méthode est appelé a chaque frame afin de mettre à jour le ui
   def updateStage(g: GdxGraphics): Boolean = {
     if (!gameStarted) {
       stage.act()
       stage.draw()
       g.drawStringCentered(
         getWindowHeight / 4f,
-        s"Joueur : ${textArea.getText}"
+        s"Joueur : ${playerName.getText}"
       )
       g.drawFPS()
       return true
