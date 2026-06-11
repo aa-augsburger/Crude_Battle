@@ -61,8 +61,8 @@ trait AutoTank {
     if(minRadar < 0 ) minRadar = 0
     if(maxRadar > myMaps.WIN_WIDTH) maxRadar = myMaps.WIN_WIDTH
     //on scanne la zone
-    for(x <- minRadar to maxRadar) {
-      val currAltitude = myMaps.surface(x)
+    for(x <- minRadar until maxRadar) {
+       val currAltitude = myMaps.surface(x)
       var dx = Math.abs(x - nextEnnemy.posX) //distance entr  entre nous et l'ennemi
       if(Math.abs(dx) > securityDistance) { //on evite de sapproche trop proche du tank ennemi
         val dy = currAltitude - nextEnnemy.posY //différence altitude entre nous et l'ennemi
@@ -85,7 +85,7 @@ trait AutoTank {
 
   def chooseEnnemy(tankArray: ArrayBuffer[Tank]): Tank = {
     var choosenTank: Tank = null
-    //on parcours le tableau des tannks
+    //on parcours le tableau des tanks, pour l'instant, on prend le premier tan
     for(tank <- tankArray) {
       if(tank != this && tank.isAlive) { //on evite de se choisir et les tanks détruits
         distEnemy = this.posX - tank.posX //calcule de la distanec

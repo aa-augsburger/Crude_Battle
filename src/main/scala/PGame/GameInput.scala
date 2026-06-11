@@ -22,6 +22,8 @@ trait GameInput {
     false
   }
 
+  //quand la touche escape est pressé
+
   def gameInput(): Unit = {
     if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
       gameStarted = false

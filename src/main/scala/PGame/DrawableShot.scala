@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.Color
 
 trait DrawableShot {
   def drawShot(g: GdxGraphics, myTank: Tank) = {
-    g.drawFilledCircle(
+    g.drawFilledCircle( // on dessine de un cercle
       myTank.shot.X,
       myTank.shot.Y,
       5,

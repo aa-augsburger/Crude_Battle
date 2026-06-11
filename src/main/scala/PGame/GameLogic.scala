@@ -63,7 +63,7 @@ trait GameLogic {
       turnState = INIT_BOT
     }
   }
-
+//Cette fonction permet d'initalisation le bot selon le type
   def init_bot(): Unit = {
     currTank match {
       case bot: AutoTank => {
@@ -75,6 +75,8 @@ trait GameLogic {
       }
     turnState = BOT_AIMING
   }
+
+  //Cette fonction est appelé quand c'est au tour du bot de tire
 
   def bot_aiming(): Unit = {
     currTank match {
@@ -97,6 +99,7 @@ trait GameLogic {
       }
     }
 
+
   /** Mise à jour de tous les tanks */
   def updateTankArray(g: GdxGraphics): Unit = {
     for (tank <- tankArray) {
@@ -106,7 +109,7 @@ trait GameLogic {
     }
   }
 
-  /** */
+  /** Appelé quand c'est au tour de joueur*/
 
 
   def aiming(): Unit = {
@@ -135,7 +138,7 @@ trait GameLogic {
       }
       if (currTank.shot.Y > 3000 | currTank.shot.Y < 0) turnState = CHANGE_PLAYER
       // COLLISION
-      // Collision avec les tanks ennemis et le sols
+      // on check les collisions avec les tanks ennemis et le sols
       collisionWithGround()
       collisionWithTank()
 
@@ -165,7 +168,7 @@ trait GameLogic {
     def collisionWithTank(): Unit = {
       for (tank <- tankArray)
         if (tank != currTank && tank.isAlive) {
-          if (currTank.shot.checkCollision(tank) && !currTank.shot.hasAlreadyHit) {
+          if (currTank.shot.checkCollision(tank) && !currTank.shot.hasAlreadyHit) { //on check la collision si le tank n'a encore pas touché un ennemi
 
             println("ENEMY TOUCHE")
 
@@ -180,6 +183,9 @@ trait GameLogic {
           }
         }
     }
+
+    /** Gestion de la  collision avec le sol */
+
 
     def collisionWithGround(): Unit = {
       if (currTank.shot.isFired) {

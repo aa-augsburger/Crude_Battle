@@ -123,7 +123,7 @@ class Game(val WIN_WIDTH: Int = 1920, val WIN_HEIGHT: Int = 1080,k: Int, var nbP
     g.drawFPS()
   }
 
-
+//Cette fonctione permet de libérer les ressources à la fermeture de l'application
   override def onDispose(): Unit = {
     super.onDispose()
     disposeGUI()
