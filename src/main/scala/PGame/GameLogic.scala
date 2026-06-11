@@ -29,17 +29,37 @@ trait GameLogic {
     }
   }
 
+  /** Vérifie si la partie est terminée (un seul tank encore en vie).
+   * Si oui, désigne le gagnant et passe à l'écran GAME OVER. */
+
+  def checkVictory(): Boolean = {
+    val aliveTanks = tankArray.filter(_.isAlive)
+    if (tankArray.size > 1 && aliveTanks.size <= 1) {
+      winner = if (aliveTanks.nonEmpty) aliveTanks.head else currTank
+      println("VICTOIRE DE : " + winner.tankName)
+      guiState = GUIState.WON
+      return true
+    }
+    false
+  }
+
   /** Quand on change de joueur */
 
   def change_player(): Unit = {
-    idxActivePlayer += 1
-    idxActivePlayer %= tankArray.size
+    // si la partie est finie, on ne change plus de joueur
+    if (checkVictory()) return
+
+    // on passe au joueur suivant en sautant les tanks détruits
+    do {
+      idxActivePlayer += 1
+      idxActivePlayer %= tankArray.size
+    } while (!tankArray(idxActivePlayer).isAlive)
+
+    currTank = tankArray(idxActivePlayer)
     if(idxActivePlayer < nbPlayer) {
-      currTank = tankArray(idxActivePlayer)
       turnState = AIMING
     }
     else {
-      currTank = tankArray(idxActivePlayer)
       turnState = INIT_BOT
     }
   }
@@ -144,7 +164,7 @@ trait GameLogic {
 
     def collisionWithTank(): Unit = {
       for (tank <- tankArray)
-        if (tank != currTank) {
+        if (tank != currTank && tank.isAlive) {
           if (currTank.shot.checkCollision(tank) && !currTank.shot.hasAlreadyHit) {
 
             println("ENEMY TOUCHE")

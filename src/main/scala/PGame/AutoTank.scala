@@ -87,7 +87,7 @@ trait AutoTank {
     var choosenTank: Tank = null
     //on parcours le tableau des tannks
     for(tank <- tankArray) {
-      if(tank != this) { //on evite de se choisir, on n'est pas suicidaire
+      if(tank != this && tank.isAlive) { //on evite de se choisir et les tanks détruits
         distEnemy = this.posX - tank.posX //calcule de la distanec
         choosenTank = tank
         println(s" ${this.tankName} ----->>>>>> ${choosenTank.tankName}")

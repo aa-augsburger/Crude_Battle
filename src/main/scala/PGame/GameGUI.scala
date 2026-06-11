@@ -1,5 +1,6 @@
 package PGame
 
+import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
@@ -20,6 +21,7 @@ trait GameGUI {
   var posX = WIN_WIDTH/2
   var posY = WIN_HEIGHT-20
   private var optimus40: BitmapFont = _
+  private var gameOverImage: BitmapImage = _
 
   def initGUI(): Unit = {
 
@@ -27,6 +29,8 @@ trait GameGUI {
 
     setTitle("Crude Battle")
     initFont()
+    // Chargement de l'image de fin de partie
+    gameOverImage = new BitmapImage("images/gameover.png")
     // Création de la scène UI (LibGDX Scene2D)
     stage = new Stage()
     Gdx.input.setInputProcessor(stage)
@@ -146,10 +150,34 @@ trait GameGUI {
 
   def updateUITank(g: GdxGraphics, tank: Tank) = {
     g.setColor(Color.BLACK)
-    g.drawString(tank.posX, tank.posY+50, "Tank " + tank.tankName + " HP : " + tank.health)
+    if (tank.isAlive)
+      g.drawString(tank.posX, tank.posY+50, "Tank " + tank.tankName + " HP : " + tank.health)
+    else
+      g.drawString(tank.posX, tank.posY+50, "Tank " + tank.tankName + " DETRUIT")
+  }
 
-    if (tank.health <= 0) {
-      g.drawString(WIN_WIDTH / 2 - 100, WIN_HEIGHT / 2, "VICTOIRE JOUEUR")
+  /** Affiche l'écran de fin de partie : image GAME OVER + nom du gagnant */
+
+  def drawGameOver(g: GdxGraphics, winner: Tank): Unit = {
+    val centerX = WIN_WIDTH / 2f
+    val centerY = WIN_HEIGHT / 2f
+
+    // image game over centrée à l'écran
+    g.drawPicture(centerX, centerY + 80, gameOverImage)
+
+    // affichage du gagnant
+    if (winner != null) {
+      g.setColor(winner.tankColor)
+      g.drawStringCentered(centerY - 130, s"VICTOIRE DE ${winner.tankName} !", optimus40)
     }
+    g.setColor(Color.BLACK)
+    g.drawStringCentered(centerY - 200, "Appuyez sur ENTER pour revenir au menu", optimus40)
+  }
+
+  /** Libère les ressources de l'interface */
+
+  def disposeGUI(): Unit = {
+    if (gameOverImage != null) gameOverImage.dispose()
+    if (optimus40 != null) optimus40.dispose()
   }
 }
