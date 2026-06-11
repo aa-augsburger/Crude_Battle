@@ -27,6 +27,7 @@ trait GameGUI {
 
     setTitle("Crude Battle")
     initFont()
+    // Création de la scène UI (LibGDX Scene2D)
     stage = new Stage()
     Gdx.input.setInputProcessor(stage)
     skin =
